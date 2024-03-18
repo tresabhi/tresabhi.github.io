@@ -3,7 +3,7 @@ import { styled, theme } from 'stitches.config';
 export const HeroButton = styled('button', {
   padding: `${theme.space.paddingRegular} ${theme.space.paddingMajor}`,
   borderRadius: theme.radii.regular,
-  transition: `transform ${theme.transitions.regular}`,
+  transition: theme.transitions.regular,
   userSelect: 'none',
   color: theme.colors.textHighContrast_accent,
   fontSize: theme.fontSizes.subheading,
