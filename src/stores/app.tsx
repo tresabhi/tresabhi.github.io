@@ -1,5 +1,4 @@
 import {
-  ChatBubbleIcon,
   FileIcon,
   GlobeIcon,
   ImageIcon,
@@ -14,7 +13,7 @@ export enum ProjectType {
   App,
   ResourcePack,
   Library,
-  Bot,
+  // Bot,
   Social,
   Website,
   Miscellaneous,
@@ -22,7 +21,7 @@ export enum ProjectType {
 
 export const PROJECT_TYPE_NAMES: Record<ProjectType, string> = {
   [ProjectType.ResourcePack]: 'Resource pack',
-  [ProjectType.Bot]: 'Bot',
+  // [ProjectType.Bot]: 'Bot',
   [ProjectType.App]: 'App',
   [ProjectType.Miscellaneous]: 'Miscellaneous',
   [ProjectType.Social]: 'Social',
@@ -31,7 +30,7 @@ export const PROJECT_TYPE_NAMES: Record<ProjectType, string> = {
 };
 export const PROJECT_TYPE_NAMES_PLURAL: Record<ProjectType, string> = {
   [ProjectType.ResourcePack]: 'Resource packs',
-  [ProjectType.Bot]: 'Bots',
+  // [ProjectType.Bot]: 'Bots',
   [ProjectType.App]: 'Apps',
   [ProjectType.Miscellaneous]: 'Miscellaneous',
   [ProjectType.Social]: 'Social',
@@ -40,7 +39,7 @@ export const PROJECT_TYPE_NAMES_PLURAL: Record<ProjectType, string> = {
 };
 export const PROJECT_TYPE_ICONS: Record<ProjectType, ComponentChild> = {
   [ProjectType.ResourcePack]: <ImageIcon />,
-  [ProjectType.Bot]: <ChatBubbleIcon />,
+  // [ProjectType.Bot]: <ChatBubbleIcon />,
   [ProjectType.App]: <MobileIcon />,
   [ProjectType.Miscellaneous]: <MixIcon />,
   [ProjectType.Social]: <PersonIcon />,

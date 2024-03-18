@@ -48,7 +48,7 @@ const Item = styled('div', {
   flexDirection: 'column',
   backgroundColor: theme.colors.componentInteractive_glass,
   borderRadius: theme.radii.regular,
-  border: theme.borderStyles.interactive_glass,
+  border: theme.borderStyles.nonInteractive_glass,
 });
 const Content = styled('div', {
   display: 'flex',
@@ -102,7 +102,7 @@ const Description = styled('span', {
 });
 const Actions = styled('div', {
   display: 'flex',
-  borderTop: theme.borderStyles.interactive_glass,
+  borderTop: theme.borderStyles.nonInteractive_glass,
 });
 const Action = styled('a', {
   flex: 1,
@@ -113,12 +113,13 @@ const Action = styled('a', {
   color: theme.colors.textLowContrast_glass,
   textDecoration: 'none',
   padding: theme.space.paddingRegular,
+  transition: theme.transitions.regular,
 
   '&:hover': {
     backgroundColor: theme.colors.componentInteractiveHover_glass,
   },
   '& + &': {
-    borderLeft: theme.borderStyles.interactive_glass,
+    borderLeft: theme.borderStyles.nonInteractive_glass,
   },
 });
 

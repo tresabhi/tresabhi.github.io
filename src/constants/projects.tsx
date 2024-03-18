@@ -69,16 +69,16 @@ export const projects: Project[] = (
 
     {
       name: 'Blitzkrieg',
-      description:
-        '🎉 All-in-one Discord bot for everything World of Tanks Blitz',
-      type: ProjectType.Bot,
+      description: '🎉 Tools for anything and everything World of Tanks Blitz',
+      type: ProjectType.Website,
       icon: '/assets/icons/blitzkrieg.svg',
 
       links: [
         {
-          label: 'GitHub',
-          icon: <GitHubLogoIcon />,
-          url: 'https://github.com/tresabhi/blitzkrieg',
+          label: 'Website',
+          icon: <GlobeIcon />,
+          url: 'https://blitz-krieg.vercel.app/',
+          target: '_blank',
         },
         {
           label: 'Add to server',
