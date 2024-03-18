@@ -1,5 +1,6 @@
 import {
   indigoDark,
+  mauveA,
   mauveDark,
   mauveDarkA,
   purpleDark,
@@ -33,6 +34,7 @@ export const {
       ...createColors(indigoDark, 'accent'),
       ...createColors(purpleDark, 'accentSecondary'),
       ...createColors(mauveDarkA, 'glass'),
+      ...createColors(mauveA, 'glassLight'),
     },
     fontSizes: {
       ...createFontSizes(),
