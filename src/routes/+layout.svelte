@@ -1,5 +1,4 @@
 <script lang="ts">
-	import LightBlob from '$lib/LightBlob.svelte';
 	import { onMount } from 'svelte';
 
 	let wrapper: HTMLDivElement;
@@ -22,20 +21,19 @@
 </script>
 
 <div id="wrapper" bind:this={wrapper} class="dark">
-	<div id="light-show-wrapper">
-		{#each { length: 8 } as _, index}
-			<LightBlob {index} />
-		{/each}
-	</div>
+	<slot />
 </div>
 
 <style>
+	@import 'https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@400;900&display=swap';
 	@import '@radix-ui/colors/mauve.css';
 	@import '@radix-ui/colors/mauve-dark.css';
 	@import '@radix-ui/colors/blue.css';
 	@import '@radix-ui/colors/blue-dark.css';
 	@import '@radix-ui/colors/purple.css';
 	@import '@radix-ui/colors/purple-dark.css';
+	@import '@radix-ui/colors/ruby.css';
+	@import '@radix-ui/colors/ruby-dark.css';
 
 	:global(body) {
 		margin: 0;
@@ -48,13 +46,7 @@
 		background-color: var(--mauve-1);
 	}
 
-	#light-show-wrapper {
-		top: 0;
-		left: 0;
-		overflow: hidden;
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		filter: blur(calc((100dvh + 100dvw) / (2 * 8)));
+	* {
+		font-family: 'Roboto Flex', sans-serif;
 	}
 </style>
