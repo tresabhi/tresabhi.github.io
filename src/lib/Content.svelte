@@ -51,7 +51,7 @@
 
 	.link {
 		text-decoration: none;
-		color: var(--mauve-11);
+		color: var(--mauve-12);
 		font-size: 1rem;
 		display: flex;
 		align-items: center;
@@ -60,7 +60,6 @@
 
 	.link:hover {
 		text-decoration: underline;
-		color: var(--mauve-12);
 	}
 
 	.link > :global(svg) {
