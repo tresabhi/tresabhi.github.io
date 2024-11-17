@@ -25,7 +25,6 @@
 </div>
 
 <style>
-	@import 'https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@400;900&display=swap';
 	@import '@radix-ui/colors/mauve.css';
 	@import '@radix-ui/colors/mauve-dark.css';
 	@import '@radix-ui/colors/blue.css';
@@ -47,6 +46,7 @@
 	}
 
 	* {
-		font-family: 'Roboto Flex', sans-serif;
+		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI (Custom)', Roboto, 'Helvetica Neue',
+			'Open Sans (Custom)', system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
 	}
 </style>
