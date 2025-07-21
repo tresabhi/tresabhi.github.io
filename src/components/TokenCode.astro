@@ -20,11 +20,16 @@ if (scope === undefined) {
 }
 
 const tree = starryNight.highlight(token.text, scope);
-const language = languages
-  .entries()
-  .find(([types]) => types.includes(token.lang))?.[1];
+let language: string | undefined;
 
-if (!language) {
+for (const [types, name] of languages) {
+  if (types.includes(token.lang)) {
+    language = name;
+    break;
+  }
+}
+
+if (language === undefined) {
   throw new Error(`Unsupported language: ${token.lang}`);
 }
 
