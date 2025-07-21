@@ -31,7 +31,11 @@ const [, alt, src] = token.text.match(pattern) ?? [];
   align="start"
   direction="column"
 >
-  <img class="image-content" {src} {alt} />
+  <img
+    class="image-content"
+    {src}
+    alt={alt ?? `Unlabeled image from ${new URL(src).host}`}
+  />
   {
     alt && (
       <Text size="2" color="gray" className="image-alt">
