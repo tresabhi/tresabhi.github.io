@@ -1,10 +1,15 @@
 ---
 import { all, createStarryNight } from "@wooorm/starry-night";
 import { type Tokens } from "marked";
+import { HighlightedCode } from "./HighlightedCode";
 import type { TokenRendererProps } from "./Markdown.astro";
-import { TreeAcceptingCode } from "./TreeAcceptingCode";
 
 type Props = TokenRendererProps<Tokens.Code>;
+
+const languages = new Map([
+  [["ts", "tsx"], "TypeScript"],
+  [["js", "jsx"], "JavaScript"],
+]);
 
 const { token } = Astro.props;
 const starryNight = await createStarryNight(all);
@@ -15,15 +20,15 @@ if (scope === undefined) {
 }
 
 const tree = starryNight.highlight(token.text, scope);
+const language = languages
+  .entries()
+  .find(([types]) => types.includes(token.lang))?.[1];
+
+if (!language) {
+  throw new Error(`Unsupported language: ${token.lang}`);
+}
+
+const size = `${token.text.length}B`;
 ---
 
-<TreeAcceptingCode
-  mb="4"
-  color="gray"
-  style={{
-    whiteSpace: "pre-wrap",
-    padding: "var(--space-3)",
-    lineHeight: "1.5em",
-  }}
-  {tree}
-/>
+<HighlightedCode client:idle {language} {tree} {size} raw={token.text} />
