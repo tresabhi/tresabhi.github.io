@@ -1,6 +1,13 @@
 import { Theme, type ThemeProps } from "@radix-ui/themes";
-import "@wooorm/starry-night/style/dark";
 
 export function BaseTheme(props: ThemeProps) {
-  return <Theme appearance="dark" {...props} />;
+  // explicitly set light theme to set .light class to apply grays
+  return (
+    <Theme
+      accentColor="indigo"
+      grayColor="mauve"
+      appearance="light"
+      {...props}
+    />
+  );
 }

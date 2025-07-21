@@ -11,9 +11,17 @@ import { BaseTheme } from "../components/BaseTheme";
     <meta name="generator" content={Astro.generator} />
 
     <style is:global>
-      @import "@radix-ui/themes/styles.css";
+      @import "@radix-ui/themes/components.css";
+      @import "@radix-ui/themes/layout.css";
+      @import "@radix-ui/themes/tokens/base.css";
+      @import "@radix-ui/themes/tokens/colors/indigo.css";
+      @import "@radix-ui/themes/tokens/colors/mauve.css";
+      @import "@radix-ui/themes/utilities.css";
+
+      @import "@wooorm/starry-night/style/light";
 
       body {
+        background-color: var(--gray-11);
         margin: 0;
       }
     </style>
