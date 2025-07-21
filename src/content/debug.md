@@ -1,8 +1,8 @@
 # The Markdown Debugger
 
-<!-- this is a comment -->
-
 This is the debugging page for Markdown containing a lot of elements, components, and complexity.
+
+<!-- this is a comment -->
 
 ## Heading of Depth 2
 

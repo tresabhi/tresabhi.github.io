@@ -1,5 +1,6 @@
 ---
 import { Flex } from "@radix-ui/themes";
+import { SEO } from "astro-seo";
 import { lexer, type Tokens } from "marked";
 import TokenCode from "./TokenCode.astro";
 import TokenHeading from "./TokenHeading.astro";
@@ -16,12 +17,20 @@ export interface TokenRendererProps<Type> {
 
 const { content } = Astro.props;
 const tokens = lexer(content);
-const title = tokens.find((token) => token.type === "heading") as
-  | Tokens.Heading
-  | undefined;
+
+if (tokens[0].type !== "heading" || tokens[0].depth !== 1) {
+  throw new Error("First token must be a level 1 heading");
+}
+
+if (tokens[1].type !== "paragraph") {
+  throw new Error("Second token must be a paragraph");
+}
+
+const title = tokens[0].text;
+const description = tokens[1].text;
 ---
 
-{title && <title>{title.text}</title>}
+<SEO slot="head" {title} {description} />
 
 <Flex direction="column">
   {
