@@ -1,5 +1,7 @@
 # The Markdown Debugger
 
+<!-- this is a comment -->
+
 This is the debugging page for Markdown containing a lot of elements, components, and complexity.
 
 ## Heading of Depth 2
@@ -37,3 +39,27 @@ export class WindowsReadStream extends ReadStream {
 This paragraph has a lot of in-line code:
 
 Donec quam tellus, dictum eu luctus ut, `tristique` a nisl. Mauris faucibus purus turpis. Donec ullamcorper urna in leo aliquet congue finibus at erat. Morbi eget `consequat` dui, quis volutpat ipsum. Phasellus enim leo, `dapibus-eu` elementum nec, dictum vel erat. Proin in blandit ante. Duis non nisl a nisl euismod pellentesque.
+
+## 🖼️ Images!
+
+Suspendisse potenti. Aenean in ornare velit. Nam a justo aliquet, tempor augue sollicitudin, ultricies ex. In lectus erat, luctus nec est in, sodales venenatis magna. Nam euismod ac magna non convallis. Donec sit amet aliquam erat. Quisque imperdiet est nulla, et semper velit molestie a. Vestibulum sed nulla a neque molestie tristique. Pellentesque et malesuada nisl. Praesent sodales odio a nisi malesuada, et elementum massa scelerisque. Sed a lobortis purus.
+
+In bibendum justo et quam blandit lacinia. Aliquam tristique ligula odio, eget lacinia elit hendrerit id. Maecenas sollicitudin molestie rutrum. Donec vel dapibus dolor. Duis lacinia augue non cursus dignissim. Sed sit amet dignissim nisl. Donec sed metus pretium, sollicitudin lacus sit amet, euismod nunc. Phasellus turpis mauris, feugiat quis malesuada in, pretium eget lorem. Nam arcu orci, elementum nec magna porttitor, porta vulputate sem.
+
+![A crazy GTA Online character sneaking around in the swamps of San Andreas, north of Los Santos.](https://i.imgur.com/YaPBn9g.jpeg)
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tincidunt nulla nulla, eu mattis dolor pretium vehicula. Morbi urna dui, imperdiet non consequat quis, placerat vel orci. Integer luctus ligula odio, eget consequat urna imperdiet a. Suspendisse pulvinar neque ut hendrerit sollicitudin.
+
+Integer dapibus nisl auctor tristique semper. Donec non tellus tempus, bibendum ligula nec, elementum nisi. Duis ultricies ex mollis justo efficitur aliquam. Curabitur dignissim vehicula libero, non volutpat magna mollis nec. Aenean faucibus arcu eros, eget condimentum nulla condimentum feugiat. Nunc pretium convallis lacus ac mollis. Sed nec ex consequat, semper est sed, dignissim metus. Quisque aliquam orci elit, eget tincidunt orci finibus ut.
+
+And this is an image of my Minecraft World as of 7/20/2025, but without alt text:
+
+![](https://i.imgur.com/6o6iLAf.jpeg)
+
+Donec quam tellus, dictum eu luctus ut, tristique a nisl. Mauris faucibus purus turpis. Donec ullamcorper urna in leo aliquet congue finibus at erat. Morbi eget consequat dui, quis volutpat ipsum. Phasellus enim leo, dapibus eu elementum nec, dictum vel erat. Proin in blandit ante. Duis non nisl a nisl euismod pellentesque.
+
+![A classic tortion loading problem from Mechanics of Materials.](https://i.imgur.com/lU9W2Hnm.png)
+
+## Tables?
+
+TODO

@@ -1,0 +1,42 @@
+---
+import { Flex, Text } from "@radix-ui/themes";
+import type { Tokens } from "marked";
+import type { TokenRendererProps } from "./Markdown.astro";
+
+type Props = TokenRendererProps<Tokens.Paragraph>;
+
+const pattern = /!\[(.+)?]\((.+)\)/;
+
+const { token } = Astro.props;
+const [, alt, src] = token.text.match(pattern) ?? [];
+---
+
+<style>
+  .image-content {
+    border-radius: var(--radius-3);
+    max-width: 100%;
+  }
+
+  .image-alt {
+    max-width: 100%;
+  }
+</style>
+
+<Flex
+  overflow="hidden"
+  width="fit-content"
+  mt="4"
+  mb="6"
+  align="start"
+  direction="column"
+  gap="4"
+>
+  <img class="image-content" {src} {alt} />
+  {
+    alt && (
+      <Text size="2" color="gray" className="image-alt">
+        {alt}
+      </Text>
+    )
+  }
+</Flex>
