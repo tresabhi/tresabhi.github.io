@@ -1,0 +1,47 @@
+---
+import { Flex } from "@radix-ui/themes";
+import { lexer, type Tokens } from "marked";
+import TokenCode from "./TokenCode.astro";
+import TokenHeading from "./TokenHeading.astro";
+import TokenParagraph from "./TokenParagraph.astro";
+
+interface Props {
+  content: string;
+}
+
+export interface TokenRendererProps<Type> {
+  token: Type | Tokens.Generic;
+}
+
+const { content } = Astro.props;
+const tokens = lexer(content);
+const title = tokens.find((token) => token.type === "heading") as
+  | Tokens.Heading
+  | undefined;
+---
+
+{title && <title>{title.text}</title>}
+
+<Flex direction="column">
+  {
+    tokens.map((token) => {
+      switch (token.type) {
+        case "heading":
+          return <TokenHeading token={token} />;
+
+        case "paragraph":
+          return <TokenParagraph token={token} />;
+
+        case "code":
+          return <TokenCode token={token} />;
+
+        case "space":
+          return null;
+
+        default:
+          console.warn(`Unhandled token type: ${token.type}`);
+          return null;
+      }
+    })
+  }
+</Flex>

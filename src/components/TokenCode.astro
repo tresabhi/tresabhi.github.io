@@ -1,0 +1,29 @@
+---
+import { all, createStarryNight } from "@wooorm/starry-night";
+import { type Tokens } from "marked";
+import type { TokenRendererProps } from "./Markdown.astro";
+import { TreeAcceptingCode } from "./TreeAcceptingCode";
+
+type Props = TokenRendererProps<Tokens.Code>;
+
+const { token } = Astro.props;
+const starryNight = await createStarryNight(all);
+const scope = starryNight.flagToScope(token.lang);
+
+if (scope === undefined) {
+  throw new Error(`Unsupported language: ${token.lang}`);
+}
+
+const tree = starryNight.highlight(token.text, scope);
+---
+
+<TreeAcceptingCode
+  mb="4"
+  color="gray"
+  style={{
+    whiteSpace: "pre-wrap",
+    padding: "var(--space-3)",
+    lineHeight: "1.5em",
+  }}
+  {tree}
+/>

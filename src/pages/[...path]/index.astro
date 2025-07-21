@@ -1,7 +1,7 @@
 ---
 import type { GetStaticPaths } from "astro";
 import { readFile } from "fs/promises";
-import { Markdown } from "../../components/Markdown";
+import Markdown from "../../components/Markdown.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 export const getStaticPaths = (() =>

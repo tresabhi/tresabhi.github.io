@@ -1,0 +1,22 @@
+---
+import { Code, Text } from "@radix-ui/themes";
+import type { Tokens } from "marked";
+import type { TokenRendererProps } from "./Markdown.astro";
+
+type Props = TokenRendererProps<Tokens.Paragraph>;
+
+const { token } = Astro.props;
+const parts = (token.text as string).split(/(`[^`]+`)/g);
+---
+
+<Text mb="4">
+  {
+    parts.map((part, index) =>
+      part.startsWith("`") && part.endsWith("`") ? (
+        <Code key={index}>{part.slice(1, -1)}</Code>
+      ) : (
+        part
+      )
+    )
+  }
+</Text>
