@@ -1,0 +1,18 @@
+---
+import type { GetStaticPaths } from "astro";
+import { readFile } from "fs/promises";
+import { Markdown } from "../../components/Markdown";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export const getStaticPaths = (() =>
+  Object.keys(import.meta.glob("../../content/**/*.md")).map((path) => ({
+    params: { path: path.replace("../../content/", "").replace(".md", "") },
+  }))) satisfies GetStaticPaths;
+
+const { path } = Astro.params;
+const content = await readFile(`src/content/${path}.md`, "utf-8");
+---
+
+<BaseLayout>
+  <Markdown {content} />
+</BaseLayout>
