@@ -31,8 +31,18 @@ import { BaseTheme } from "../components/BaseTheme";
 
   <body>
     <BaseTheme>
-      <Flex justify="center" p={{ initial: "5", md: "8" }} overflow="hidden">
-        <Flex direction="column" flexGrow="1" gap="9" maxWidth="60rem">
+      <Flex
+        justify="center"
+        p={{ initial: "4", md: "8" }}
+        overflow="hidden"
+        maxWidth="100vw"
+      >
+        <Flex
+          direction="column"
+          flexGrow="1"
+          gap="9"
+          maxWidth="min(60rem, 100%)"
+        >
           <slot />
         </Flex>
       </Flex>
