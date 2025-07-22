@@ -1,6 +1,7 @@
 ---
 import { Flex, Text } from "@radix-ui/themes";
 import type { Tokens } from "marked";
+import { sourceSet } from "../core/sourceSet";
 import type { TokenRendererProps } from "./Markdown.astro";
 
 type Props = TokenRendererProps<Tokens.Paragraph>;
@@ -9,16 +10,19 @@ const pattern = /!\[(.+)?]\((.+)\)/;
 
 const { token } = Astro.props;
 const [, alt, src] = token.text.match(pattern) ?? [];
+const { srcset, originalUrl, originalSize } = await sourceSet(src);
 ---
 
-<style>
+<style
+  define:vars={{
+    "aspect-ratio": `${originalSize[0]} / ${originalSize[1]}`,
+    "max-width": `${originalSize[0]}px`,
+  }}
+>
   .image-content {
     border-radius: var(--radius-3);
-    max-width: 100%;
-  }
-
-  .image-alt {
-    max-width: 100%;
+    aspect-ratio: var(--aspect-ratio);
+    max-width: min(100%, var(--max-width));
   }
 </style>
 
@@ -33,12 +37,13 @@ const [, alt, src] = token.text.match(pattern) ?? [];
 >
   <img
     class="image-content"
-    {src}
+    src={originalUrl}
+    {srcset}
     alt={alt ?? `Unlabeled image from ${new URL(src).host}`}
   />
   {
     alt && (
-      <Text size="2" color="gray" className="image-alt">
+      <Text size="2" color="gray">
         {alt}
       </Text>
     )
