@@ -1,11 +1,22 @@
 ---
 import { type Tokens } from "marked";
-import { HighlightedCode } from "./HighlightedCode";
+import HighlightedCodeIntermediate from "./HighlightedCodeIntermediate.astro";
+import { HighlightedCodeWrapper } from "./HighlightedCodeWrapper";
 import type { TokenRendererProps } from "./Markdown.astro";
 
 type Props = TokenRendererProps<Tokens.Code>;
 
 const { token } = Astro.props;
+
+/**
+ * The wrapper Astro island only inherits language and content, leaving no need
+ * to build tree or render anything. This is because we do a
+ * Astro -> React -> Astro -> React wrapping so that the wrapper only gets
+ * a pre-rendered, completely static tree, no need to hydrate the syntax
+ * highlighting.
+ */
 ---
 
-<HighlightedCode client:idle lang={token.lang} content={token.text} />
+<HighlightedCodeWrapper client:idle lang={token.lang} content={token.text}>
+  <HighlightedCodeIntermediate lang={token.lang} content={token.text} />
+</HighlightedCodeWrapper>

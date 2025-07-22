@@ -1,13 +1,11 @@
 import { CopyIcon } from "@radix-ui/react-icons";
-import { Box, Button, Code, Flex, ScrollArea, Text } from "@radix-ui/themes";
-import { all, createStarryNight } from "@wooorm/starry-night";
-import { toJsxRuntime } from "hast-util-to-jsx-runtime";
+import { Box, Button, Flex, ScrollArea, Text } from "@radix-ui/themes";
 import { useEffect, useRef } from "react";
-import { Fragment, jsx, jsxs } from "react/jsx-runtime";
 
 interface Props {
   lang: string;
   content: string;
+  children: React.ReactNode;
 }
 
 const LANGUAGES = new Map([
@@ -15,17 +13,7 @@ const LANGUAGES = new Map([
   [["js", "jsx"], "JavaScript"],
 ]);
 
-const starryNight = await createStarryNight(all);
-
-export function HighlightedCode({ lang, content }: Props) {
-  const scope = starryNight.flagToScope(lang);
-
-  if (scope === undefined) {
-    throw new Error(`Unsupported language: ${lang}`);
-  }
-
-  const tree = starryNight.highlight(content, scope);
-  const node = toJsxRuntime(tree, { Fragment, jsx, jsxs });
+export function HighlightedCodeWrapper({ lang, content, children }: Props) {
   const size = `${content.length}B`;
 
   let language: string | undefined;
@@ -70,19 +58,7 @@ export function HighlightedCode({ lang, content }: Props) {
         width="100%"
         position="relative"
       >
-        <ScrollArea ref={code}>
-          <Code
-            variant="ghost"
-            style={{
-              overflow: "auto",
-              padding: "var(--space-3)",
-              display: "block",
-              whiteSpace: "pre",
-              lineHeight: "1.5em",
-            }}
-            children={node}
-          />
-        </ScrollArea>
+        <ScrollArea ref={code}>{children}</ScrollArea>
 
         <Box
           ref={leftCurtain}

@@ -40,6 +40,9 @@ const { srcset, originalUrl, originalSize } = await sourceSet(src);
     src={originalUrl}
     {srcset}
     alt={alt ?? `Unlabeled image from ${new URL(src).host}`}
+    loading="lazy"
+    decoding="async"
+    fetchpriority="auto"
   />
   {
     alt && (
