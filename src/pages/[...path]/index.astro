@@ -1,6 +1,8 @@
 ---
 import type { GetStaticPaths } from "astro";
+import { SEO } from "astro-seo";
 import { readFile } from "fs/promises";
+import { lexer } from "marked";
 import Markdown from "../../components/Markdown.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
@@ -11,8 +13,21 @@ export const getStaticPaths = (() =>
 
 const { path } = Astro.params;
 const content = await readFile(`src/content/${path}.md`, "utf-8");
+const tokens = lexer(content);
+
+if (tokens[0].type !== "heading" || tokens[0].depth !== 1) {
+  throw new Error("First token must be a level 1 heading");
+}
+
+if (tokens[1].type !== "paragraph") {
+  throw new Error("Second token must be a paragraph");
+}
+
+const title = tokens[0].text;
+const description = tokens[1].text;
 ---
 
 <BaseLayout>
-  <Markdown {content} />
+  <SEO slot="head" {title} {description} />
+  <Markdown {tokens} />
 </BaseLayout>
