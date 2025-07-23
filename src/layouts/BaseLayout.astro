@@ -31,17 +31,16 @@ import { BaseTheme } from "../components/BaseTheme";
 
   <body>
     <BaseTheme>
-      <Flex
-        justify="center"
-        p={{ initial: "4", sm: "6", md: "8" }}
-        overflow="hidden"
-        maxWidth="100vw"
-      >
+      <Flex justify="center" p="5" overflow="hidden" maxWidth="100vw">
         <Flex
           direction="column"
           flexGrow="1"
           gap="9"
-          maxWidth="min(45rem, 100%)"
+          maxWidth={{
+            initial: "100%",
+            sm: "min(35rem, 100%)",
+            md: "min(45rem, 100%)",
+          }}
         >
           <slot />
         </Flex>
