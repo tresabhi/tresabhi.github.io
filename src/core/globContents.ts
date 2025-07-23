@@ -3,7 +3,7 @@ import { lexer, type TokensList } from "marked";
 const prefix = /^\.\.\/content\//;
 const suffix = /\.md$/;
 
-export async function content() {
+export async function globContents() {
   const glob = import.meta.glob<boolean, string, string>("../content/**/*.md", {
     query: "?raw",
     import: "default",

@@ -1,19 +1,28 @@
 ---
-import type { GetStaticPaths } from "astro";
+import type { GetStaticPaths, GetStaticPathsResult } from "astro";
 import { SEO } from "astro-seo";
-import { readFile } from "fs/promises";
-import { lexer } from "marked";
-import Markdown from "../../components/Markdown.astro";
+import { type TokensList } from "marked";
+import TokensRenderer from "../../components/TokensRenderer.astro";
+import { globContents } from "../../core/globContents";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
-export const getStaticPaths = (() =>
-  Object.keys(import.meta.glob("../../content/**/*.md")).map((path) => ({
-    params: { path: path.replace("../../content/", "").replace(".md", "") },
-  }))) satisfies GetStaticPaths;
+export const getStaticPaths: GetStaticPaths = async () => {
+  const content = await globContents();
+  const pages: GetStaticPathsResult = [];
 
-const { path } = Astro.params;
-const content = await readFile(`src/content/${path}.md`, "utf-8");
-const tokens = lexer(content);
+  for (const [path, lexer] of content) {
+    pages.push({ params: { path }, props: { lexer } });
+  }
+
+  return pages;
+};
+
+interface Props {
+  lexer: () => Promise<TokensList>;
+}
+
+const { lexer } = Astro.props;
+const tokens = await lexer();
 
 if (tokens[0].type !== "heading" || tokens[0].depth !== 1) {
   throw new Error("First token must be a level 1 heading");
@@ -29,5 +38,5 @@ const description = tokens[1].text;
 
 <BaseLayout>
   <SEO slot="head" {title} {description} />
-  <Markdown {tokens} />
+  <TokensRenderer {tokens} />
 </BaseLayout>

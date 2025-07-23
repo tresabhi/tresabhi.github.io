@@ -1,0 +1,10 @@
+---
+import type { Tokens } from "marked";
+import type { TokenRendererProps } from "./TokenRenderer.astro";
+
+type Props = TokenRendererProps<Tokens.HTML | Tokens.Tag>;
+
+const { token } = Astro.props;
+---
+
+<Fragment set:html={token.raw} />

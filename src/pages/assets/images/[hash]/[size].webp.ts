@@ -1,8 +1,8 @@
 import type { APIContext, GetStaticPaths, GetStaticPathsResult } from "astro";
 import sharp from "sharp";
 import { collectImages } from "../../../../core/collectImages";
-import { content } from "../../../../core/content";
 import { filterSizes } from "../../../../core/filterSizes";
+import { globContents } from "../../../../core/globContents";
 import { hashContent } from "../../../../core/hashContent";
 
 export const IMAGE_SIZES = [
@@ -19,7 +19,7 @@ export const IMAGE_SIZES = [
 export type ImageSize = (typeof IMAGE_SIZES)[number];
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const pages = await content();
+  const pages = await globContents();
   const images: string[] = [];
 
   for (const [, lexer] of pages) {

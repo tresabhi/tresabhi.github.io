@@ -2,7 +2,8 @@
 import { Flex, Heading, type HeadingProps } from "@radix-ui/themes";
 import type { Tokens } from "marked";
 import ConsistentSeparator from "./ConsistentSeparator.astro";
-import type { TokenRendererProps } from "./Markdown.astro";
+import type { TokenRendererProps } from "./TokenRenderer.astro";
+import TokensRenderer from "./TokensRenderer.astro";
 
 type Props = TokenRendererProps<Tokens.Heading>;
 
@@ -22,7 +23,8 @@ const { token } = Astro.props;
     mb="0.25em"
     className="heading"
   >
-    {token.text}
+    <TokensRenderer tokens={token.tokens} />
   </Heading>
+
   <ConsistentSeparator />
 </Flex>

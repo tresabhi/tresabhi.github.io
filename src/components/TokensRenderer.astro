@@ -1,0 +1,12 @@
+---
+import type { Token } from "marked";
+import TokenRenderer from "./TokenRenderer.astro";
+
+interface Props {
+  tokens?: Token[];
+}
+
+const { tokens } = Astro.props;
+---
+
+{tokens && tokens.map((token) => <TokenRenderer {token} />)}

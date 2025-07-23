@@ -1,0 +1,45 @@
+---
+import { type Token, type Tokens } from "marked";
+import TokenCode from "./TokenCode.astro";
+import TokenCodeSpan from "./TokenCodeSpan.astro";
+import TokenHeading from "./TokenHeading.astro";
+import TokenHtml from "./TokenHtml.astro";
+import TokenImage from "./TokenImage.astro";
+import TokenParagraph from "./TokenParagraph.astro";
+import TokenSpace from "./TokenSpace.astro";
+import TokenText from "./TokenText.astro";
+
+interface Props {
+  token: Token;
+}
+
+export interface TokenRendererProps<Type> {
+  token: Type | Tokens.Generic;
+}
+
+const { token } = Astro.props;
+---
+
+{
+  token.type === "space" ? (
+    <TokenSpace {token} />
+  ) : token.type === "text" ? (
+    <TokenText {token} />
+  ) : token.type === "html" ? (
+    <TokenHtml {token} />
+  ) : token.type === "heading" ? (
+    <TokenHeading {token} />
+  ) : token.type === "paragraph" ? (
+    <TokenParagraph {token} />
+  ) : token.type === "code" ? (
+    <TokenCode {token} />
+  ) : token.type === "codespan" ? (
+    <TokenCodeSpan {token} />
+  ) : token.type === "image" ? (
+    <TokenImage {token} />
+  ) : (
+    (() => {
+      throw new Error(`Unsupported token type: ${token.type}`);
+    })()
+  )
+}

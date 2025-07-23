@@ -1,0 +1,13 @@
+---
+import type { Tokens } from "marked";
+import { unsupportedTokens } from "../core/unsupportedTokens";
+import type { TokenRendererProps } from "./TokenRenderer.astro";
+
+type Props = TokenRendererProps<Tokens.Text>;
+
+const { token } = Astro.props;
+
+unsupportedTokens(token, "text");
+---
+
+{token.text}

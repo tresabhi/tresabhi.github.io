@@ -2,15 +2,15 @@
 import { Flex, Text } from "@radix-ui/themes";
 import type { Tokens } from "marked";
 import { sourceSet } from "../core/sourceSet";
-import type { TokenRendererProps } from "./Markdown.astro";
+import type { TokenRendererProps } from "./TokenRenderer.astro";
+import TokensRenderer from "./TokensRenderer.astro";
 
-type Props = TokenRendererProps<Tokens.Paragraph>;
-
-const pattern = /!\[(.+)?]\((.+)\)/;
+type Props = TokenRendererProps<Tokens.Image>;
 
 const { token } = Astro.props;
-const [, alt, src] = token.text.match(pattern) ?? [];
-const { srcset, originalUrl, originalSize } = await sourceSet(src);
+
+const { srcset, originalUrl, originalSize } = await sourceSet(token.href);
+const host = new URL(token.href).host;
 ---
 
 <style
@@ -39,15 +39,15 @@ const { srcset, originalUrl, originalSize } = await sourceSet(src);
     class="image-content"
     src={originalUrl}
     {srcset}
-    alt={alt ?? `Unlabeled image from ${new URL(src).host}`}
+    alt={token.text ?? `Unlabeled image from ${host}`}
     loading="lazy"
     decoding="async"
     fetchpriority="auto"
   />
   {
-    alt && (
+    token.text && (
       <Text size="2" color="gray">
-        {alt}
+        <TokensRenderer tokens={token.tokens} />
       </Text>
     )
   }
