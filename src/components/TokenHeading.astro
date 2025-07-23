@@ -9,8 +9,19 @@ type Props = TokenRendererProps<Tokens.Heading>;
 const { token } = Astro.props;
 ---
 
+<style>
+  .heading {
+    letter-spacing: var(--letter-spacing-9);
+  }
+</style>
+
 <Flex direction="column" my="4">
-  <Heading size={`${9 - token.depth}` as HeadingProps["size"]} mb="0.25em">
+  <Heading
+    weight="medium"
+    size={`${9 - token.depth}` as HeadingProps["size"]}
+    mb="0.25em"
+    className="heading"
+  >
     {token.text}
   </Heading>
   <ConsistentSeparator />
