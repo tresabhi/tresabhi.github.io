@@ -1,0 +1,16 @@
+---
+import { Code } from "@radix-ui/themes";
+import type { Tokens } from "marked";
+import type { TokenRendererProps } from "./TokenRenderer.astro";
+
+export interface LatexToken extends Tokens.Generic {
+  type: "latex";
+  text: string;
+}
+
+type Props = TokenRendererProps<LatexToken>;
+
+const { token } = Astro.props;
+---
+
+<Code>$${token.text}$$</Code>

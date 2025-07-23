@@ -1,0 +1,14 @@
+---
+import { Text } from "@radix-ui/themes";
+import type { Tokens } from "marked";
+import type { TokenRendererProps } from "./TokenRenderer.astro";
+import TokensRenderer from "./TokensRenderer.astro";
+
+type Props = TokenRendererProps<Tokens.Strong>;
+
+const { token } = Astro.props;
+---
+
+<Text weight="medium">
+  <TokensRenderer tokens={token.tokens} />
+</Text>

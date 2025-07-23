@@ -5,8 +5,12 @@ import TokenCodeSpan from "./TokenCodeSpan.astro";
 import TokenHeading from "./TokenHeading.astro";
 import TokenHtml from "./TokenHtml.astro";
 import TokenImage from "./TokenImage.astro";
+import TokenLatex from "./TokenLatex.astro";
+import TokenLink from "./TokenLink.astro";
+import TokenMacro from "./TokenMacro.astro";
 import TokenParagraph from "./TokenParagraph.astro";
 import TokenSpace from "./TokenSpace.astro";
+import TokenStrong from "./TokenStrong.astro";
 import TokenText from "./TokenText.astro";
 
 interface Props {
@@ -18,28 +22,60 @@ export interface TokenRendererProps<Type> {
 }
 
 const { token } = Astro.props;
+let Component;
+
+switch (token.type) {
+  case "space":
+    Component = TokenSpace;
+    break;
+
+  case "text":
+    Component = TokenText;
+    break;
+
+  case "html":
+    Component = TokenHtml;
+    break;
+
+  case "heading":
+    Component = TokenHeading;
+    break;
+
+  case "paragraph":
+    Component = TokenParagraph;
+    break;
+
+  case "strong":
+    Component = TokenStrong;
+    break;
+
+  case "link":
+    Component = TokenLink;
+    break;
+
+  case "image":
+    Component = TokenImage;
+    break;
+
+  case "code":
+    Component = TokenCode;
+    break;
+
+  case "codespan":
+    Component = TokenCodeSpan;
+    break;
+
+  case "latex":
+    Component = TokenLatex;
+    break;
+
+  case "macro":
+    Component = TokenMacro;
+    break;
+
+  default:
+    throw new Error(`Unsupported token type: ${token.type}`);
+}
 ---
 
-{
-  token.type === "space" ? (
-    <TokenSpace {token} />
-  ) : token.type === "text" ? (
-    <TokenText {token} />
-  ) : token.type === "html" ? (
-    <TokenHtml {token} />
-  ) : token.type === "heading" ? (
-    <TokenHeading {token} />
-  ) : token.type === "paragraph" ? (
-    <TokenParagraph {token} />
-  ) : token.type === "code" ? (
-    <TokenCode {token} />
-  ) : token.type === "codespan" ? (
-    <TokenCodeSpan {token} />
-  ) : token.type === "image" ? (
-    <TokenImage {token} />
-  ) : (
-    (() => {
-      throw new Error(`Unsupported token type: ${token.type}`);
-    })()
-  )
-}
+<Component {token} />

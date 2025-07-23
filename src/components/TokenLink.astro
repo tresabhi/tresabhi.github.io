@@ -1,0 +1,19 @@
+---
+import { Link } from "@radix-ui/themes";
+import type { Tokens } from "marked";
+import type { TokenRendererProps } from "./TokenRenderer.astro";
+import TokensRenderer from "./TokensRenderer.astro";
+
+type Props = TokenRendererProps<Tokens.Link>;
+
+const { token } = Astro.props;
+const isExternal = token.href.startsWith("http");
+---
+
+<Link
+  href={token.href}
+  underline="always"
+  target={isExternal ? "_blank" : "_self"}
+>
+  <TokensRenderer tokens={token.tokens} />
+</Link>

@@ -24,11 +24,11 @@ interface Props {
 const { lexer } = Astro.props;
 const tokens = await lexer();
 
-if (tokens[0].type !== "heading" || tokens[0].depth !== 1) {
+if (!tokens[0] || tokens[0].type !== "heading" || tokens[0].depth !== 1) {
   throw new Error("First token must be a level 1 heading");
 }
 
-if (tokens[1].type !== "paragraph") {
+if (!tokens[1] || tokens[1].type !== "paragraph") {
   throw new Error("Second token must be a paragraph");
 }
 
