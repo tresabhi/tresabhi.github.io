@@ -1,0 +1,34 @@
+---
+import { Blockquote, type BlockquoteProps } from "@radix-ui/themes";
+import { lexer, type Tokens } from "marked";
+import type { TokenRendererProps } from "./TokenRenderer.astro";
+import TokensRenderer from "./TokensRenderer.astro";
+
+type Props = TokenRendererProps<Tokens.Blockquote>;
+
+const variantPattern = /> \[!([A-Z]+)]\n>/;
+const variants: Record<string, BlockquoteProps["color"]> = {
+  CAUTION: "tomato",
+  TIP: "blue",
+  NOTE: "jade",
+};
+
+let { token } = Astro.props;
+const variantMatch = token.raw.match(variantPattern);
+let color: BlockquoteProps["color"];
+
+if (variantMatch) {
+  const name = variantMatch[1];
+
+  if (name in variants) {
+    color = variants[name as keyof typeof variants];
+    [token] = lexer(token.raw.slice(variantMatch[0].length));
+  } else {
+    throw new Error(`Unknown blockquote variant: ${name}`);
+  }
+}
+---
+
+<Blockquote {color}>
+  <TokensRenderer tokens={token.tokens} />
+</Blockquote>

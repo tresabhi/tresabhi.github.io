@@ -1,7 +1,10 @@
 ---
 import { type Token, type Tokens } from "marked";
+import TokenBlockquote from "./TokenBlockquote.astro";
 import TokenCode from "./TokenCode.astro";
 import TokenCodeSpan from "./TokenCodeSpan.astro";
+import TokenDel from "./TokenDel.astro";
+import TokenEm from "./TokenEm.astro";
 import TokenHeading from "./TokenHeading.astro";
 import TokenHtml from "./TokenHtml.astro";
 import TokenImage from "./TokenImage.astro";
@@ -31,10 +34,13 @@ const Components = {
   html: TokenHtml,
   heading: TokenHeading,
   paragraph: TokenParagraph,
+  em: TokenEm,
   strong: TokenStrong,
+  del: TokenDel,
   link: TokenLink,
   image: TokenImage,
   code: TokenCode,
+  blockquote: TokenBlockquote,
   codespan: TokenCodeSpan,
   table: TokenTable,
   list: TokenList,
@@ -52,4 +58,5 @@ if (token.type in Components) {
 }
 ---
 
+{/* @ts-ignore typescript stack limit reach lmao */}
 <Component {token} />

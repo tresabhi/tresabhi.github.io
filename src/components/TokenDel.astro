@@ -1,0 +1,11 @@
+---
+import type { Tokens } from "marked";
+import type { TokenRendererProps } from "./TokenRenderer.astro";
+import TokensRenderer from "./TokensRenderer.astro";
+
+type Props = TokenRendererProps<Tokens.Del>;
+
+const { token } = Astro.props;
+---
+
+<sub><TokensRenderer tokens={token.tokens} /></sub>

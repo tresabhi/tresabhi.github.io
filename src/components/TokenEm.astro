@@ -1,0 +1,12 @@
+---
+import { Em } from "@radix-ui/themes";
+import type { Tokens } from "marked";
+import type { TokenRendererProps } from "./TokenRenderer.astro";
+import TokensRenderer from "./TokensRenderer.astro";
+
+type Props = TokenRendererProps<Tokens.Em>;
+
+const { token } = Astro.props;
+---
+
+<Em><TokensRenderer tokens={token.tokens} /></Em>
