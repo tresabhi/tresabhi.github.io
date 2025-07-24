@@ -1,4 +1,10 @@
 {
-  "cSpell.words": ["codespan", "jsxs", "tresabhi"],
+  "cSpell.words": [
+    "codespan",
+    "inlinemacro",
+    "jsxs",
+    "parametricmacro",
+    "tresabhi"
+  ],
   "typescript.tsdk": "node_modules\\typescript\\lib"
 }

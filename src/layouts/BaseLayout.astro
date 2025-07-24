@@ -14,9 +14,12 @@ import { BaseTheme } from "../components/BaseTheme";
       @import "@radix-ui/themes/components.css";
       @import "@radix-ui/themes/layout.css";
       @import "@radix-ui/themes/tokens/base.css";
+      @import "@radix-ui/themes/utilities.css";
+
       @import "@radix-ui/themes/tokens/colors/indigo.css";
       @import "@radix-ui/themes/tokens/colors/mauve.css";
-      @import "@radix-ui/themes/utilities.css";
+      /* TODO: only import blue, etc when needed based on lexer content */
+      @import "@radix-ui/themes/tokens/colors/blue.css";
 
       @import "@wooorm/starry-night/style/light";
 

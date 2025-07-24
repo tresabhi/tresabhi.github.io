@@ -1,0 +1,14 @@
+---
+import { Text, type TextProps } from "@radix-ui/themes";
+import * as z from "zod";
+import type { ParametricMacroRendererProps } from "./TokenParametricMacro.astro";
+
+type Props = ParametricMacroRendererProps;
+
+const { parameters } = Astro.props;
+
+const ColoredParameters = z.tuple([z.string(), z.string()]);
+const [color, content] = ColoredParameters.parse(parameters);
+---
+
+<Text color={color as TextProps["color"]}>{content}</Text>
