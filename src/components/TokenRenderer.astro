@@ -7,10 +7,13 @@ import TokenHtml from "./TokenHtml.astro";
 import TokenImage from "./TokenImage.astro";
 import TokenLatex from "./TokenLatex.astro";
 import TokenLink from "./TokenLink.astro";
+import TokenList from "./TokenList.astro";
+import TokenListItem from "./TokenListItem.astro";
 import TokenParagraph from "./TokenParagraph.astro";
 import TokenParametricMacro from "./TokenParametricMacro.astro";
 import TokenSpace from "./TokenSpace.astro";
 import TokenStrong from "./TokenStrong.astro";
+import TokenTable from "./TokenTable.astro";
 import TokenText from "./TokenText.astro";
 
 interface Props {
@@ -33,6 +36,9 @@ const Components = {
   image: TokenImage,
   code: TokenCode,
   codespan: TokenCodeSpan,
+  table: TokenTable,
+  list: TokenList,
+  list_item: TokenListItem,
   latex: TokenLatex,
   parametricmacro: TokenParametricMacro,
 };

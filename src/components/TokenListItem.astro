@@ -3,9 +3,9 @@ import type { Tokens } from "marked";
 import type { TokenRendererProps } from "./TokenRenderer.astro";
 import TokensRenderer from "./TokensRenderer.astro";
 
-type Props = TokenRendererProps<Tokens.Text>;
+type Props = TokenRendererProps<Tokens.ListItem>;
 
 const { token } = Astro.props;
 ---
 
-{token.tokens ? <TokensRenderer tokens={token.tokens} /> : token.text}
+<li><TokensRenderer tokens={token.tokens} /></li>

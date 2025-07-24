@@ -9,4 +9,14 @@ interface Props {
 const { tokens } = Astro.props;
 ---
 
+<style is:global>
+  section[data-horizontal] span {
+    display: flex;
+  }
+
+  colored[blue] {
+    color: var(--blue-9);
+  }
+</style>
+
 {tokens && tokens.map((token) => <TokenRenderer {token} />)}

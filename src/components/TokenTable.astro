@@ -1,0 +1,38 @@
+---
+import { Table } from "@radix-ui/themes";
+import { type Tokens } from "marked";
+import type { TokenRendererProps } from "./TokenRenderer.astro";
+import TokensRenderer from "./TokensRenderer.astro";
+
+type Props = TokenRendererProps<Tokens.Table>;
+
+const { token } = Astro.props;
+---
+
+<Table.Root>
+  <Table.Header>
+    <Table.Row>
+      {
+        (token.header as Tokens.Generic[]).map((cell) => (
+          <Table.ColumnHeaderCell>
+            <TokensRenderer tokens={cell.tokens} />
+          </Table.ColumnHeaderCell>
+        ))
+      }
+    </Table.Row>
+  </Table.Header>
+
+  <Table.Body>
+    {
+      (token.rows as Tokens.Generic[][]).map((row) => (
+        <Table.Row>
+          {row.map((cell) => (
+            <Table.Cell>
+              <TokensRenderer tokens={cell.tokens} />
+            </Table.Cell>
+          ))}
+        </Table.Row>
+      ))
+    }
+  </Table.Body>
+</Table.Root>
