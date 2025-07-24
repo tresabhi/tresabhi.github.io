@@ -1,0 +1,33 @@
+---
+import { sourceSet } from "../core/sourceSet";
+
+interface Props {
+  src: string;
+  alt: string;
+}
+
+const { src, alt } = Astro.props;
+const { srcset, originalUrl, originalSize } = await sourceSet(src);
+---
+
+<style
+  define:vars={{
+    "aspect-ratio": `${originalSize[0]} / ${originalSize[1]}`,
+    "max-width": `${originalSize[0]}px`,
+  }}
+>
+  .responsive-image {
+    aspect-ratio: var(--aspect-ratio);
+    max-width: min(100%, var(--max-width));
+  }
+</style>
+
+<img
+  class="responsive-image"
+  src={originalUrl}
+  {srcset}
+  {alt}
+  loading="lazy"
+  decoding="async"
+  fetchpriority="auto"
+/>

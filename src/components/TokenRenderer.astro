@@ -22,59 +22,27 @@ export interface TokenRendererProps<Type> {
 }
 
 const { token } = Astro.props;
+const Components = {
+  space: TokenSpace,
+  text: TokenText,
+  html: TokenHtml,
+  heading: TokenHeading,
+  paragraph: TokenParagraph,
+  strong: TokenStrong,
+  link: TokenLink,
+  image: TokenImage,
+  code: TokenCode,
+  codespan: TokenCodeSpan,
+  latex: TokenLatex,
+  macro: TokenMacro,
+};
+
 let Component;
 
-switch (token.type) {
-  case "space":
-    Component = TokenSpace;
-    break;
-
-  case "text":
-    Component = TokenText;
-    break;
-
-  case "html":
-    Component = TokenHtml;
-    break;
-
-  case "heading":
-    Component = TokenHeading;
-    break;
-
-  case "paragraph":
-    Component = TokenParagraph;
-    break;
-
-  case "strong":
-    Component = TokenStrong;
-    break;
-
-  case "link":
-    Component = TokenLink;
-    break;
-
-  case "image":
-    Component = TokenImage;
-    break;
-
-  case "code":
-    Component = TokenCode;
-    break;
-
-  case "codespan":
-    Component = TokenCodeSpan;
-    break;
-
-  case "latex":
-    Component = TokenLatex;
-    break;
-
-  case "macro":
-    Component = TokenMacro;
-    break;
-
-  default:
-    throw new Error(`Unsupported token type: ${token.type}`);
+if (token.type in Components) {
+  Component = Components[token.type as keyof typeof Components];
+} else {
+  throw new Error(`Unsupported token type: ${token.type}`);
 }
 ---
 

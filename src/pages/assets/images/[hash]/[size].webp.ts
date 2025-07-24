@@ -20,11 +20,13 @@ export type ImageSize = (typeof IMAGE_SIZES)[number];
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const pages = await globContents();
-  const images: string[] = [];
+  const images = new Set<string>();
 
   for (const [, lexer] of pages) {
-    const tokens = await lexer();
-    images.push(...collectImages(tokens));
+    const { tokens, frontMatter } = await lexer();
+
+    if (frontMatter.hero) images.add(frontMatter.hero);
+    for (const image of collectImages(tokens)) images.add(image);
   }
 
   const paths: GetStaticPathsResult = [];

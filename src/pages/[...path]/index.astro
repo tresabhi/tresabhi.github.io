@@ -1,9 +1,11 @@
 ---
 import type { GetStaticPaths, GetStaticPathsResult } from "astro";
-import { SEO } from "astro-seo";
-import { type TokensList } from "marked";
+import FrontMatterHero from "../../components/FrontMatterHero.astro";
 import TokensRenderer from "../../components/TokensRenderer.astro";
-import { globContents } from "../../core/globContents";
+import {
+  globContents,
+  type CustomLexerReturnType,
+} from "../../core/globContents";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -18,25 +20,17 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 interface Props {
-  lexer: () => Promise<TokensList>;
+  lexer: () => Promise<CustomLexerReturnType>;
 }
 
 const { lexer } = Astro.props;
-const tokens = await lexer();
-
-if (!tokens[0] || tokens[0].type !== "heading" || tokens[0].depth !== 1) {
-  throw new Error("First token must be a level 1 heading");
-}
-
-if (!tokens[1] || tokens[1].type !== "paragraph") {
-  throw new Error("Second token must be a paragraph");
-}
-
-const title = tokens[0].text;
-const description = tokens[1].text;
+const { tokens, frontMatter } = await lexer();
 ---
 
 <BaseLayout>
-  <SEO slot="head" {title} {description} />
+  <!-- <SEO slot="head" {title} {description} /> -->
+
+  {frontMatter.hero && <FrontMatterHero hero={frontMatter.hero} />}
+
   <TokensRenderer {tokens} />
 </BaseLayout>

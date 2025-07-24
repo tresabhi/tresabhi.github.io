@@ -1,7 +1,7 @@
 ---
 import { Flex, Text } from "@radix-ui/themes";
 import type { Tokens } from "marked";
-import { sourceSet } from "../core/sourceSet";
+import ResponsiveImage from "./ResponsiveImage.astro";
 import type { TokenRendererProps } from "./TokenRenderer.astro";
 import TokensRenderer from "./TokensRenderer.astro";
 
@@ -9,40 +9,26 @@ type Props = TokenRendererProps<Tokens.Image>;
 
 const { token } = Astro.props;
 
-const { srcset, originalUrl, originalSize } = await sourceSet(token.href);
 const host = new URL(token.href).host;
 ---
 
-<style
-  define:vars={{
-    "aspect-ratio": `${originalSize[0]} / ${originalSize[1]}`,
-    "max-width": `${originalSize[0]}px`,
-  }}
->
-  .image-content {
+<style is:global>
+  .image img {
     border-radius: var(--radius-3);
-    aspect-ratio: var(--aspect-ratio);
-    max-width: min(100%, var(--max-width));
   }
 </style>
 
 <Flex
   overflow="hidden"
   width="fit-content"
-  mt="4"
-  mb="6"
   gap="3"
   align="center"
   direction="column"
+  className="image"
 >
-  <img
-    class="image-content"
-    src={originalUrl}
-    {srcset}
+  <ResponsiveImage
+    src={token.href}
     alt={token.text ?? `Unlabeled image from ${host}`}
-    loading="lazy"
-    decoding="async"
-    fetchpriority="auto"
   />
   {
     token.text && (

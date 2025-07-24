@@ -1,3 +1,7 @@
+---
+hero: https://i.imgur.com/QO4PXMK.png
+---
+
 # How to Talk to Aliens
 
 This guide will help you identify extraterrestrial visitors, ensure mutual safety, demonstrate friendliness, ask meaningful questions, and assist them in departing Earth. It assumes you are proficient in English and understand modern reading, writing, tools, and basic arithmetic. Some steps may require specialized tools, for which you should refer to their respective guides for proper usage.

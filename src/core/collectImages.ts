@@ -1,15 +1,13 @@
 import type { Token } from "marked";
 
-export function collectImages(tokens: Token[]) {
-  const images: string[] = [];
-
+export function collectImages(tokens: Token[], set = new Set<string>()) {
   for (const token of tokens) {
-    if (token.type === "image") images.push(token.href);
+    if (token.type === "image") set.add(token.href);
 
     if ("tokens" in token && token.tokens !== undefined) {
-      images.push(...collectImages(token.tokens));
+      collectImages(token.tokens, set);
     }
   }
 
-  return images;
+  return set;
 }

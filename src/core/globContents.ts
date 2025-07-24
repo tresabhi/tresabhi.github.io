@@ -1,7 +1,15 @@
-import { lexer, marked, type TokensList } from "marked";
+import { load } from "js-yaml";
+import { lexer, marked } from "marked";
 
-const prefix = /^\.\.\/content\//;
-const suffix = /\.md$/;
+const pathPrefixPattern = /^\.\.\/content\//;
+const pathSuffixPattern = /\.md$/;
+const frontMatterPattern = /^---\n(.+)\n---/;
+
+export interface FrontMatter {
+  hero: string;
+}
+
+type FrontMatterPartial = Partial<FrontMatter>;
 
 marked.use({
   tokenizer: {
@@ -17,7 +25,7 @@ marked.use({
     //   } satisfies LatexToken;
     // },
 
-    code(src) {
+    code: (src: string) => {
       const match = src.match(/^@(\w+)\s*\((.*)\)/s);
 
       if (!match) return;
@@ -29,22 +37,41 @@ marked.use({
         parameters: match[2],
       };
     },
-  },
+  } as any, // unfortunately the type annotations from the library are incorrect
 });
+
+function customLexer(content: string) {
+  content = content.replaceAll("\r\n", "\n");
+  let frontMatter: FrontMatterPartial = {};
+  const frontMatterMatch = content.match(frontMatterPattern);
+
+  if (frontMatterMatch) {
+    const frontMatterRaw = frontMatterMatch[1];
+    frontMatter = load(frontMatterRaw) as FrontMatterPartial;
+    content = content.slice(frontMatterMatch[0].length);
+  }
+
+  const tokens = lexer(content);
+
+  return { tokens, frontMatter };
+}
+
+export type CustomLexerReturnType = Awaited<ReturnType<typeof customLexer>>;
 
 export async function globContents() {
   const glob = import.meta.glob<boolean, string, string>("../content/**/*.md", {
     query: "?raw",
     import: "default",
   });
-  const content: Map<string, () => Promise<TokensList>> = new Map();
+  const contents: Map<string, () => Promise<CustomLexerReturnType>> = new Map();
 
   for (const key in glob) {
-    const path = key.replace(prefix, "").replace(suffix, "");
-    const _lexer = () => glob[key]().then((value) => lexer(value));
+    const path = key
+      .replace(pathPrefixPattern, "")
+      .replace(pathSuffixPattern, "");
 
-    content.set(path, _lexer);
+    contents.set(path, () => glob[key]().then(customLexer));
   }
 
-  return content;
+  return contents;
 }
