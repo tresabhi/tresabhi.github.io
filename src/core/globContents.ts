@@ -1,6 +1,6 @@
 import { load } from "js-yaml";
 import { lexer, marked } from "marked";
-import type { ParametricMacroToken } from "../components/TokenParametricMacro.astro";
+import { latexBlockExtension, latexInlineExtension } from "./latexExtensions";
 
 const pathPrefixPattern = /^\.\.\/content\//;
 const pathSuffixPattern = /\.md$/;
@@ -12,32 +12,7 @@ export interface FrontMatter {
 
 type FrontMatterPartial = Partial<FrontMatter>;
 
-marked.use({
-  extensions: [
-    {
-      name: "parametricmacro",
-      level: "inline",
-
-      start(src) {
-        return src.indexOf("@");
-      },
-
-      tokenizer(src) {
-        const rule = /^@(\w+)\s*\((.*)\)/s;
-        const match = rule.exec(src);
-
-        if (match) {
-          return {
-            type: "parametricmacro",
-            raw: match[0],
-            name: match[1],
-            parameters: load(`[${match[2]}]`) as unknown[],
-          } satisfies ParametricMacroToken;
-        }
-      },
-    },
-  ],
-});
+marked.use({ extensions: [latexBlockExtension, latexInlineExtension] });
 
 function customLexer(content: string) {
   content = content.replaceAll("\r\n", "\n");

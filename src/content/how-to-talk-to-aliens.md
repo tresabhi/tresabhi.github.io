@@ -238,11 +238,11 @@ Aliens will likely have no difficulty recognizing human intelligence. Even if th
 
 Present the alien with fundamental mathematical constants to demonstrate humanity’s deep understanding of nature. While humans commonly use base-10 (0-9) for numerical representation, this choice is arbitrary. Universally, base-2 (binary) is the most fundamental numerical system. As illustrated in **Figure 3.3A**, you can display the following constants through any means:
 
-Pi (π) demonstrates our mastery of geometry: `11.001001000011111101101010100010001000010110100011`
+Pi ($\pi$) demonstrates our mastery of geometry: $11.001001000011111101101010100010001000010110100011$
 
-Euler’s number (e) signifies our understanding of infinitesimal mathematics (calculus): `10.10110111111000010101000101100010100010111110001`
+Euler’s number ($r$) signifies our understanding of infinitesimal mathematics (calculus): $10.10110111111000010101000101100010100010111110001$
 
-The Golden Ratio (φ) reflects our comprehension of mathematical patterns in nature: `1.100111100011011101100010000101000111101011101`
+The Golden Ratio ($\phi$) reflects our comprehension of mathematical patterns in nature: $1.100111100011011101100010000101000111101011101$
 
 ![**Figure 3.3A:** Binary is the fundamental medium of communication.](https://i.imgur.com/DcOOv9E.png)
 
@@ -288,16 +288,16 @@ You can pose questions visually if you have confirmed the alien has visual sense
 
 Below are some pre-computed equations—use some as examples and present the rest as challenges for the alien to solve:
 
-| Addition                  | Subtraction             | Multiplication         |
-| ------------------------- | ----------------------- | ---------------------- |
-| 1011 + 1101 = 11000       | 1101 - 101 = 1000       | 101 × 11 = 1111        |
-| 10010 + 11001 = 101011    | 10110 - 1001 = 1101     | 110 × 10 = 1100        |
-| 111 + 1010 = 10001        | 11101 - 1100 = 10101    | 111 × 101 = 100011     |
-| 11011 + 1011 = 100110     | 10011 - 1010 = 101      | 1001 × 11 = 11011      |
-| 101010 + 110110 = 1100000 | 110010 - 10101 = 101101 | 1100 × 1010 = 1111000  |
-| 1111 + 1001 = 11000       | 10101 - 1111 = 110      | 1011 × 110 = 1000110   |
-| 100001 + 11101 = 111110   | 100000 - 1111 = 10001   | 1111 × 1111 = 11100001 |
-| 100 + 1100 = 10000        | 110100 - 10001 = 101011 | 10010 × 101 = 1011010  |
+| Addition                    | Subtraction               | Multiplication                |
+| --------------------------- | ------------------------- | ----------------------------- |
+| $1011 + 1101 = 11000$       | $1101 - 101 = 1000$       | $101 \times 11 = 1111$        |
+| $10010 + 11001 = 101011$    | $10110 - 1001 = 1101$     | $110 \times 10 = 1100$        |
+| $111 + 1010 = 10001$        | $11101 - 1100 = 10101$    | $111 \times 101 = 100011$     |
+| $11011 + 1011 = 100110$     | $10011 - 1010 = 101$      | $1001 \times 11 = 11011$      |
+| $101010 + 110110 = 1100000$ | $110010 - 10101 = 101101$ | $1100 \times 1010 = 1111000$  |
+| $1111 + 1001 = 11000$       | $10101 - 1111 = 110$      | $1011 \times 110 = 1000110$   |
+| $100001 + 11101 = 111110$   | $100000 - 1111 = 10001$   | $1111 \times 1111 = 11100001$ |
+| $100 + 1100 = 10000$        | $110100 - 10001 = 101011$ | $10010 \times 101 = 1011010$  |
 
 If the alien does not respond to incomplete equations, skip section **4.3: Auditory Prompts** and ignore further instructions from this section.
 

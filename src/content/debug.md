@@ -16,7 +16,59 @@ In at justo pellentesque, vehicula metus at, fermentum augue. Sed euismod sed ve
 
 Suspendisse potenti. Aenean in ornare velit. Nam a justo aliquet, tempor augue sollicitudin, ultricies ex. In lectus erat, luctus nec est in, sodales venenatis magna. Nam euismod ac magna non convallis. Donec sit amet aliquam erat. Quisque imperdiet est nulla, et semper velit molestie a. Vestibulum sed nulla a neque molestie tristique. Pellentesque et malesuada nisl. Praesent sodales odio a nisi malesuada, et elementum massa scelerisque. Sed a lobortis purus.
 
-In bibendum justo et quam blandit lacinia. Aliquam tristique ligula odio, eget lacinia elit hendrerit id. Maecenas sollicitudin molestie rutrum. Donec vel dapibus dolor. Duis lacinia augue non cursus dignissim. Sed sit amet dignissim nisl. Donec sed metus pretium, sollicitudin lacus sit amet, euismod nunc. Phasellus turpis mauris, feugiat quis malesuada in, pretium eget lorem. Nam arcu orci, elementum nec magna porttitor, porta vulputate sem.
+$$
+\Gamma = \oint_C V \cdot ds
+$$
+
+$$
+\Gamma_A = \int_\text{bottom} u(-a/2) \hat{i} \cdot \hat{i} ~ dx + \int_\text{right} u(y) \cancel{\hat{i} \cdot \hat{j}} ~ dy + \int_\text{top} u(a/2) \hat{i} \cdot -\hat{i} ~ dx + \int_\text{left} u(y) \cancel{\hat{i} \cdot -\hat{j}} ~ dy
+$$
+
+$$
+\Gamma_A = \int_0^a u(-a/2) dx - \int_0^a u(a/2) dx
+$$
+
+$$
+\Gamma_A = \int_0^a U_m - \frac{U_m}{H^2}(-a/2)^2 dx - \int_0^a U_m - \frac{U_m}{H^2}(a/2)^2 dx
+$$
+
+$$
+\Gamma_A = \cancel{\int_0^a U_m - \frac{U_m a^2}{4 H^2} dx} - \cancel{\int_0^a U_m - \frac{U_m a^2}{4 H^2} dx}
+$$
+
+$$
+\boxed{\Gamma_A = 0}
+$$
+
+$$
+\Gamma_B = \int_\text{bottom} u(0) \hat{i} \cdot \hat{i} ~ dx + \int_\text{right} u(y) \cancel{\hat{i} \cdot \hat{j}} ~ dy + \int_\text{top} u(a) \hat{i} \cdot -\hat{i} ~ dx + \int_\text{left} u(y) \cancel{\hat{i} \cdot -\hat{j}} ~ dy
+$$
+
+$$
+\Gamma_B = \int_0^a u(0) dx - \int_0^a u(a) dx
+$$
+
+$$
+\Gamma_B = u(0) \int_0^a dx - u(a) \int_0^a dx
+$$
+
+$$
+\Gamma_B = u(0) a - u(a) a
+$$
+
+$$
+\Gamma_B = a U_m - \cancel{\frac{a U_m}{H^2} \cdot 0^2} - (a U_m - \frac{a U_m}{H^2}a^2)
+$$
+
+$$
+\Gamma_B = \cancel{a U_m} - \cancel{a U_m} + \frac{a U_m}{H^2}a^2
+$$
+
+$$
+\boxed{\Gamma_B = -\frac{a^3 U_m}{H^2}}
+$$
+
+In bibendum justo et quam blandit lacinia. Aliquam tristique $\frac{2\pi}{3}$ ligula odio, eget lacinia elit hendrerit id. Maecenas sollicitudin molestie rutrum. Donec vel dapibus dolor. Duis lacinia augue non cursus dignissim. Sed sit amet dignissim nisl. Donec sed metus pretium, sollicitudin lacus sit amet, euismod nunc. Phasellus turpis mauris, feugiat quis malesuada in, pretium eget lorem. Nam arcu orci, elementum nec magna porttitor, porta vulputate sem.
 
 ### Another Heading of Depth 3
 

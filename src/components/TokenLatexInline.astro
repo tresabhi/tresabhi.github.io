@@ -1,0 +1,12 @@
+---
+import { renderToString } from "katex";
+import type { LatexInlineToken } from "../core/latexExtensions";
+import type { TokenRendererProps } from "./TokenRenderer.astro";
+
+type Props = TokenRendererProps<LatexInlineToken>;
+
+const { token } = Astro.props;
+const html = renderToString(token.formula);
+---
+
+<Fragment set:html={html} />
