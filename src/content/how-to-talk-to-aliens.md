@@ -22,9 +22,9 @@ This is likely the universe's most common and populace type of alien. It is huma
 
 Some aliens may feature more than a single cell and are often visible to the human eye; however, they may lack advanced evolutionary features, landing them in the “primitive” category. The simplest way to differentiate between primitive and complex aliens is to look for the density of sensors across their bodies. If you note an extrusion from their body, dense with sensors, the region likely houses the brain.
 
-An Earthly example can be seen in **Figure 0.1.2A**, where a deer has evolved to minimize the distance between <colored blue>all its sensors and the brain (1)</colored>. On the other hand, a starfish, as seen in **Figure 0.1.2B**, lacks any concentration of sensors. This guide assumes you are dealing with a complex creature. Still, it is acceptable to follow through even with a primitive creature, as complex creatures are likely collecting telemetry remotely.
+An Earthly example can be seen in **Figure 0.1.2A**, where a deer has evolved to minimize the distance between all its sensors and the brain (1). On the other hand, a starfish, as seen in **Figure 0.1.2B**, lacks any concentration of sensors. This guide assumes you are dealing with a complex creature. Still, it is acceptable to follow through even with a primitive creature, as complex creatures are likely collecting telemetry remotely.
 
-<section data-horizontal>
+<section horizontal>
 
 ![**Figure 0.1.2A:** A deer is complex.](https://i.imgur.com/x2bMEcq.png)
 ![**Figure 0.1.2B:** A starfish is primitive.](https://i.imgur.com/r0zc3Qj.png)
@@ -41,13 +41,13 @@ It is improbable for intelligent creatures to send members of their species as t
 
 Safety must be at the forefront of every step when pursuing an unprecedented task. All hazmat suits are slightly different but offer the same thing: flux nulling. In other words, they drastically reduce the amount of foreign particles reaching your body. There are no guarantees of what microbes, diseases, infections, chemicals, radiation, etc., the aliens will bring along with them. The hazmat suit will be your proxy until everything is flagged safe for unprotected interaction.
 
-Follow instructions specific to your hazmat suit to dress up; ensure you are completely sealed and shielded. Never compromise financially when purchasing suits. **Figure 0.2A** displays a generic hazmat suit comprising of the <colored blue>screen (1)</colored>, your optical interface, the <colored blue>skin (2)</colored>, the layer of fabric that minimizes foreign flux, the <colored blue>gloves (3)</colored>, serving an identical purpose to the <colored blue>skin (2)</colored> all the while allowing for physical interactions, and the <colored blue>boots (4)</colored>, increasing your surface area over soft terrain and stopping prograde fumes.
+Follow instructions specific to your hazmat suit to dress up; ensure you are completely sealed and shielded. Never compromise financially when purchasing suits. **Figure 0.2A** displays a generic hazmat suit comprising of the screen (1), your optical interface, the skin (2), the layer of fabric that minimizes foreign flux, the gloves (3), serving an identical purpose to the skin (2) all the while allowing for physical interactions, and the boots (4), increasing your surface area over soft terrain and stopping prograde fumes.
 
 ![**Figure 0.2A:** A full-body hazmat suit.](https://i.imgur.com/UQPIORx.png)
 
 ## Geiger Counters
 
-Another bodily risk aliens pose is radiation. As seen in **Figure 0.3A**, a Geiger counter measures the radiation received divided by time and is usually displayed to the user on a <colored blue>segmented display (1)</colored>.
+Another bodily risk aliens pose is radiation. As seen in **Figure 0.3A**, a Geiger counter measures the radiation received divided by time and is usually displayed to the user on a segmented display (1).
 
 For the radiation, this guide uses “microrem per hour,” often denoted as “microrem/h,” “microrem/hr,” “µrem/h,” or “µrem/hr.” Consult the instructions for your specific Geiger counter to switch to using these units. Alternatively, convert your readings to hourly microrems using tools like [WolframAlpha](https://www.wolframalpha.com/).
 
@@ -55,7 +55,7 @@ For the radiation, this guide uses “microrem per hour,” often denoted as “
 
 ## Sandbags
 
-You may use sandbags to form a barrier between <colored blue>your property (3)</colored> and the aliens. As demonstrated in **Figure 0.4A**, <colored blue>sandbags (2)</colored> are very cheap and offer decent protection against <colored blue>radiation and lights (1)</colored>, the aliens may be emitting <colored>liquids (1)</colored> the biological processes may be producing, among many things. If you decide to deploy sandbags, consider building walls multiple layers thick to increase effectiveness.
+You may use sandbags to form a barrier between your property (3) and the aliens. As demonstrated in **Figure 0.4A**, sandbags (2) are very cheap and offer decent protection against radiation and lights (1), the aliens may be emitting <colored>liquids (1) the biological processes may be producing, among many things. If you decide to deploy sandbags, consider building walls multiple layers thick to increase effectiveness.
 
 ![**Figure 0.4A:** A mound of sandbags can protect your house well.](https://i.imgur.com/5uQ8ayW.png)
 
@@ -85,7 +85,7 @@ Before proceeding with communications, you must eliminate any possibility that t
 
 ## Intoxicated Hallucinations
 
-According to the Cleveland Clinic, hallucinations due to alcohol consumption typically occur at a BAC level of 0.2-0.3% or higher. If you fall under this categorization, your impairment may lead to the misidentification of Earthly creatures. Even at levels lower than that, obscured vision can cause misidentifications, especially of <colored blue>members of your species (1)</colored>, as can be seen in **Figure 1.1A**.
+According to the Cleveland Clinic, hallucinations due to alcohol consumption typically occur at a BAC level of 0.2-0.3% or higher. If you fall under this categorization, your impairment may lead to the misidentification of Earthly creatures. Even at levels lower than that, obscured vision can cause misidentifications, especially of members of your species (1), as can be seen in **Figure 1.1A**.
 
 Refer to [the Cleveland Clinic’s article on this topic](https://my.clevelandclinic.org/health/diagnostics/22689-blood-alcohol-content-bac) to determine if you are hallucinating. Suspend any further steps if you are intoxicated. Some common beverages that can contribute to intoxication include:
 
@@ -111,7 +111,7 @@ There are other mental disorders or bodily states that you may possess that you 
 
 ## Environmental Cues
 
-Suppose you have encountered a species on a planet that is not Earth, for example, on <colored blue>Mars (1)</colored>, as illustrated by **Figure 1.3A**. In that case, you are most likely an astronaut sponsored by a governmental or private space agency. In this case, disregard this guide and follow through with the instructions provided by your mission control.
+Suppose you have encountered a species on a planet that is not Earth, for example, on Mars (1), as illustrated by **Figure 1.3A**. In that case, you are most likely an astronaut sponsored by a governmental or private space agency. In this case, disregard this guide and follow through with the instructions provided by your mission control.
 
 ![**Figure 1.3A**: A Martian alien is out of the scope of this guide.](https://i.imgur.com/xIjk4B3.png)
 
@@ -130,12 +130,12 @@ If the species is alive and does not display signs of struggle like you. In that
 
 If the alien makes an apparent attempt at communication that appears well structured in a medium unlike any common ones on Earth or alien to terrestrial techniques, it is likely intelligent life. Analyze its specific medium of communication. Species on Earth generally use sound and physical motion to communicate. If the species appears to be emitting light, it’s highly likely to be an alien.
 
-It is also entirely plausible for <colored blue>alien life (1)</colored> to attempt to replicate <colored blue>human language (2)</colored> or introduce its novel physical scripting scheme, as exemplified in **Figure 1.5A**. Be sensitive to any such details. Written language is a clear indicator of intelligent alien life.
+It is also entirely plausible for alien life (1) to attempt to replicate human language (2) or introduce its novel physical scripting scheme, as exemplified in **Figure 1.5A**. Be sensitive to any such details. Written language is a clear indicator of intelligent alien life.
 
 ![**Figure 1.5A**: An alien communicating in an Earthly language is a good sign of intelligence.](https://i.imgur.com/xG1Yu7F.png)
 
 > [!TIP]
-> Respond to aliens using the same medium they communicate in. For example, as shown in **Figure 1.5A**, a <colored blue>written language (2)</colored> is best answered in writing rather than spoken aloud.
+> Respond to aliens using the same medium they communicate in. For example, as shown in **Figure 1.5A**, a written language (2) is best answered in writing rather than spoken aloud.
 
 ## Safety of Both Parties
 
@@ -211,7 +211,7 @@ To assist the alien in conducting its biological processes with solvents that en
 - H~2~O~2~: hydrogen peroxide is a water-like solvent formed in oxygen-rich environments, as seen when used by extremophiles on Earth.
 
 > [!TIP]
-> Avoid using metals and plastics to serve these liquids, as the containers may react with the aliens’ bodies. Use metals from the platinum group, like platinum or ceramics, preferably unglazed (with no shiny coats or paints). Furthermore, avoid overwhelming the <colored blue>alien (2)</colored> with <colored blue>too many choices (1)</colored> at once, as exemplified by **Figure 3.1A**.
+> Avoid using metals and plastics to serve these liquids, as the containers may react with the aliens’ bodies. Use metals from the platinum group, like platinum or ceramics, preferably unglazed (with no shiny coats or paints). Furthermore, avoid overwhelming the alien (2) with too many choices (1) at once, as exemplified by **Figure 3.1A**.
 
 ![**Figure 3.1A:** The choices of solvents may stump the alien.](https://i.imgur.com/dNmZDwH.png)
 
@@ -338,7 +338,7 @@ When the alien starts retracting its equipment and disengaging in communications
 
 ## Chemical Propulsion and Nuclear Thermal Rockets
 
-The craft likely uses a chemical or nuclear thermal motor if it features <colored blue>a distinct nozzle (1)</colored>, as shown in **Figure 5.1A**. Distinguishing between the two without specialized equipment or destructive analysis is nearly impossible.
+The craft likely uses a chemical or nuclear thermal motor if it features a distinct nozzle (1), as shown in **Figure 5.1A**. Distinguishing between the two without specialized equipment or destructive analysis is nearly impossible.
 
 ![**Figure 5.1A:** Chemical and nuclear rockets feature nozzles.](https://i.imgur.com/Gu2dksQ.png)
 

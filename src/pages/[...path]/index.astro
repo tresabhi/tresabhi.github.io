@@ -1,6 +1,7 @@
 ---
 import type { GetStaticPaths, GetStaticPathsResult } from "astro";
 import FrontMatterHero from "../../components/FrontMatterHero.astro";
+import Head from "../../components/Head.astro";
 import TokensRenderer from "../../components/TokensRenderer.astro";
 import {
   globContents,
@@ -28,9 +29,7 @@ const { tokens, frontMatter } = await lexer();
 ---
 
 <BaseLayout>
-  <!-- <SEO slot="head" {title} {description} /> -->
-
+  <Head slot="head" {tokens} />
   <FrontMatterHero {...frontMatter} />
-
   <TokensRenderer {tokens} />
 </BaseLayout>

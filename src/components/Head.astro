@@ -1,0 +1,24 @@
+---
+import { SEO } from "astro-seo";
+import type { Tokens, TokensList } from "marked";
+
+interface Props {
+  tokens: TokensList;
+}
+
+const { tokens } = Astro.props;
+
+const heading = tokens.find(
+  (token) => token.type === "heading" && token.depth === 1
+) as Tokens.Heading | undefined;
+
+if (heading === undefined) throw new Error("No heading found");
+
+const description = tokens.find((token) => token.type === "paragraph") as
+  | Tokens.Paragraph
+  | undefined;
+
+if (description === undefined) throw new Error("No description found");
+---
+
+<SEO title={heading.text} description={description.text} />
