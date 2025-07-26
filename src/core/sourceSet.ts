@@ -1,21 +1,30 @@
-import { filterSizes } from "./filterSizes";
-import { hashContent } from "./hashContent";
+import type { Sharp } from "sharp";
 
 const ROOT = "/assets/images";
 
-export async function sourceSet(src: string) {
-  const response = await fetch(src);
-  const buffer = await response.arrayBuffer();
-  const name = await hashContent(buffer);
-  const { sizes, original } = await filterSizes(buffer);
+export const IMAGE_SIZES = [
+  320,
+  480,
+  640,
+  800,
+  1024,
+  1280,
+  1600,
+  "original",
+] as const;
 
+export async function sourceSet(image: Sharp, name: string) {
+  const metadata = await image.metadata();
+  const sizes = IMAGE_SIZES.filter(
+    (size) => size === "original" || size <= metadata.width
+  );
   const srcset = sizes
     .map(
       (size) =>
-        `${ROOT}/${name}/${size}.webp ${size === "original" ? original[0] : size}w`
+        `${ROOT}/${name}/${size}.webp ${size === "original" ? metadata.width : size}w`
     )
     .join(", ");
-  const originalUrl = `${ROOT}/${name}/original.webp`;
+  const src = `${ROOT}/${name}/original.webp ${metadata.width}w`;
 
-  return { srcset, originalUrl, originalSize: original };
+  return { src, srcset, metadata, sizes };
 }
