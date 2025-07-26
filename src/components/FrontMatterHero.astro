@@ -2,9 +2,9 @@
 import type { FrontMatter } from "../core/globContents";
 import ResponsiveImage from "./ResponsiveImage.astro";
 
-type Props = Pick<FrontMatter, "hero">;
+type Props = FrontMatter;
 
 const { hero } = Astro.props;
 ---
 
-<ResponsiveImage src={hero} alt="" />
+{hero && <ResponsiveImage src={hero} alt="Hero image" />}

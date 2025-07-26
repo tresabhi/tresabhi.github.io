@@ -30,7 +30,7 @@ const { tokens, frontMatter } = await lexer();
 <BaseLayout>
   <!-- <SEO slot="head" {title} {description} /> -->
 
-  {frontMatter.hero && <FrontMatterHero hero={frontMatter.hero} />}
+  <FrontMatterHero {...frontMatter} />
 
   <TokensRenderer {tokens} />
 </BaseLayout>

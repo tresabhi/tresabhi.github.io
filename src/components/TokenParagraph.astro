@@ -9,6 +9,6 @@ type Props = TokenRendererProps<Tokens.Paragraph>;
 const { token } = Astro.props;
 ---
 
-<Text mb="4">
+<Text wrap="pretty" mb="4">
   <TokensRenderer tokens={token.tokens} />
 </Text>

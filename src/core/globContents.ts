@@ -4,24 +4,22 @@ import { latexBlockExtension, latexInlineExtension } from "./latexExtensions";
 
 const pathPrefixPattern = /^\.\.\/content\//;
 const pathSuffixPattern = /\.md$/;
-const frontMatterPattern = /^---\n(.+)\n---/;
+const frontMatterPattern = /^---\n(.+)\n---/s;
 
 export interface FrontMatter {
-  hero: string;
+  hero?: string;
 }
-
-type FrontMatterPartial = Partial<FrontMatter>;
 
 marked.use({ extensions: [latexBlockExtension, latexInlineExtension] });
 
 function customLexer(content: string) {
   content = content.replaceAll("\r\n", "\n");
-  let frontMatter: FrontMatterPartial = {};
+  let frontMatter: FrontMatter = {};
   const frontMatterMatch = content.match(frontMatterPattern);
 
   if (frontMatterMatch) {
     const frontMatterRaw = frontMatterMatch[1];
-    frontMatter = load(frontMatterRaw) as FrontMatterPartial;
+    frontMatter = load(frontMatterRaw) as FrontMatter;
     content = content.slice(frontMatterMatch[0].length);
   }
 
