@@ -10,6 +10,8 @@ import { BaseTheme } from "../components/BaseTheme";
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
 
+    <link rel="stylesheet" href="/styles/katex.css" />
+
     <style is:global>
       @import "@radix-ui/themes/components.css";
       @import "@radix-ui/themes/layout.css";
@@ -23,7 +25,6 @@ import { BaseTheme } from "../components/BaseTheme";
       @import "@radix-ui/themes/tokens/colors/jade.css";
 
       @import "@wooorm/starry-night/style/light";
-      @import "katex/dist/katex.css";
 
       body {
         background-color: var(--gray-11);
