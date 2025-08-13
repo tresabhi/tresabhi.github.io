@@ -1,6 +1,13 @@
 ---
-import { Flex } from "@radix-ui/themes";
+import { Flex, type FlexProps } from "@radix-ui/themes";
 import { BaseTheme } from "../components/BaseTheme";
+import Navbar from "../components/Navbar.astro";
+
+export const pageMaxWidth: FlexProps["maxWidth"] = {
+  initial: "100%",
+  sm: "min(45rem, 100%)",
+  md: "min(60rem, 100%)",
+};
 ---
 
 <html lang="en">
@@ -27,7 +34,6 @@ import { BaseTheme } from "../components/BaseTheme";
       @import "@wooorm/starry-night/style/light";
 
       body {
-        background-color: var(--gray-11);
         margin: 0;
       }
     </style>
@@ -37,17 +43,13 @@ import { BaseTheme } from "../components/BaseTheme";
 
   <body>
     <BaseTheme>
-      <Flex justify="center" p="5" overflow="hidden" maxWidth="100vw">
-        <Flex
-          direction="column"
-          flexGrow="1"
-          maxWidth={{
-            initial: "100%",
-            sm: "min(35rem, 100%)",
-            md: "min(45rem, 100%)",
-          }}
-        >
-          <slot />
+      <Flex direction="column" overflow="hidden" maxWidth="100vw">
+        <Navbar />
+
+        <Flex justify="center">
+          <Flex mb="7" flexGrow="1" direction="column" maxWidth={pageMaxWidth}>
+            <slot />
+          </Flex>
         </Flex>
       </Flex>
     </BaseTheme>

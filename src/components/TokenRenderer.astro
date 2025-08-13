@@ -1,5 +1,6 @@
 ---
 import { type Token, type Tokens } from "marked";
+import type { FrontMatter } from "../core/globContents";
 import TokenBlockquote from "./TokenBlockquote.astro";
 import TokenCode from "./TokenCode.astro";
 import TokenCodeSpan from "./TokenCodeSpan.astro";
@@ -22,13 +23,21 @@ import TokenText from "./TokenText.astro";
 
 interface Props {
   token: Token;
+  frontMatter: FrontMatter;
+  fileContext: FileContext;
+}
+
+export interface FileContext {
+  created: Date;
 }
 
 export interface TokenRendererProps<Type> {
   token: Type | Tokens.Generic;
+  frontMatter: FrontMatter;
+  fileContext: FileContext;
 }
 
-const { token } = Astro.props;
+const { token, frontMatter, fileContext } = Astro.props;
 const Components = {
   space: TokenSpace,
   text: TokenText,
@@ -61,4 +70,4 @@ if (token.type in Components) {
 ---
 
 {/* @ts-ignore typescript stack limit reach lmao */}
-<Component {token} />
+<Component {token} {frontMatter} {fileContext} />

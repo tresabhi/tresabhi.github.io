@@ -1,5 +1,5 @@
 ---
-hero: https://i.imgur.com/QO4PXMK.png
+tags: [Aliens, Satire, Guide]
 ---
 
 # How to Talk to Aliens

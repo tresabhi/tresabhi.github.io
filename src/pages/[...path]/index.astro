@@ -1,12 +1,14 @@
 ---
 import type { GetStaticPaths, GetStaticPathsResult } from "astro";
-import FrontMatterHero from "../../components/FrontMatterHero.astro";
 import Head from "../../components/Head.astro";
+import type { FileContext } from "../../components/TokenRenderer.astro";
 import TokensRenderer from "../../components/TokensRenderer.astro";
+import { git } from "../../core/git";
 import {
   globContents,
   type CustomLexerReturnType,
 } from "../../core/globContents";
+import { makeDate } from "../../core/makeDate";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -24,12 +26,20 @@ interface Props {
   lexer: () => Promise<CustomLexerReturnType>;
 }
 
+const { path } = Astro.params;
 const { lexer } = Astro.props;
+
 const { tokens, frontMatter } = await lexer();
+
+const file = `src/content/${path}.md`;
+const created = await git
+  .log({ file, n: 1, "--diff-filter": "A" })
+  .then((log) => makeDate(log.latest?.date));
+
+const fileContext: FileContext = { created };
 ---
 
 <BaseLayout>
   <Head slot="head" {tokens} />
-  <FrontMatterHero {...frontMatter} />
-  <TokensRenderer {tokens} />
+  <TokensRenderer {tokens} {frontMatter} {fileContext} />
 </BaseLayout>

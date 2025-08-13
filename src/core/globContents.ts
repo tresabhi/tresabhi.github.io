@@ -7,7 +7,7 @@ const pathSuffixPattern = /\.md$/;
 const frontMatterPattern = /^---\n(.+)\n---/s;
 
 export interface FrontMatter {
-  hero?: string;
+  tags?: string[];
 }
 
 marked.use({ extensions: [latexBlockExtension, latexInlineExtension] });

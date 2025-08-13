@@ -1,5 +1,11 @@
 ---
-import { Flex, Heading, type HeadingProps } from "@radix-ui/themes";
+import {
+  Badge,
+  Flex,
+  Heading,
+  Text,
+  type HeadingProps,
+} from "@radix-ui/themes";
 import type { Tokens } from "marked";
 import ConsistentSeparator from "./ConsistentSeparator.astro";
 import type { TokenRendererProps } from "./TokenRenderer.astro";
@@ -7,7 +13,14 @@ import TokensRenderer from "./TokensRenderer.astro";
 
 type Props = TokenRendererProps<Tokens.Heading>;
 
-const { token } = Astro.props;
+const { token, frontMatter, fileContext } = Astro.props;
+const isH1 = token.depth === 1;
+
+const timeFormat: Intl.DateTimeFormatOptions = {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+};
 ---
 
 <style>
@@ -16,15 +29,33 @@ const { token } = Astro.props;
   }
 </style>
 
-<Flex direction="column" my="4">
+<Flex direction="column" mt={isH1 ? undefined : "4"} mb={isH1 ? "6" : "4"}>
   <Heading
-    weight="medium"
-    size={`${9 - token.depth}` as HeadingProps["size"]}
-    mb="0.25em"
+    size={`${8 - token.depth}` as HeadingProps["size"]}
+    mb="0.3em"
     className="heading"
+    weight="medium"
   >
-    <TokensRenderer tokens={token.tokens} />
+    <TokensRenderer tokens={token.tokens} {frontMatter} {fileContext} />
   </Heading>
 
   <ConsistentSeparator />
+
+  {
+    isH1 && (
+      <Flex mt="3" align="center" justify="between">
+        <Text size="2" color="gray">
+          {fileContext.created.toLocaleDateString(undefined, timeFormat)}
+        </Text>
+
+        {frontMatter.tags && (
+          <Flex gap="2">
+            {frontMatter.tags.map((tag) => (
+              <Badge variant="surface">{tag}</Badge>
+            ))}
+          </Flex>
+        )}
+      </Flex>
+    )
+  }
 </Flex>
