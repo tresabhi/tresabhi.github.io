@@ -1,5 +1,6 @@
 ---
-import { Blockquote, type BlockquoteProps } from "@radix-ui/themes";
+import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
+import { Box, Code, Flex, Text, type BlockquoteProps } from "@radix-ui/themes";
 import { lexer, type Tokens } from "marked";
 import type { TokenRendererProps } from "./TokenRenderer.astro";
 import TokensRenderer from "./TokensRenderer.astro";
@@ -7,28 +8,67 @@ import TokensRenderer from "./TokensRenderer.astro";
 type Props = TokenRendererProps<Tokens.Blockquote>;
 
 const variantPattern = /> \[!([A-Z]+)]\n>/;
-const variants: Record<string, BlockquoteProps["color"]> = {
+const variantColors: Record<string, BlockquoteProps["color"]> = {
   CAUTION: "tomato",
   TIP: "blue",
   NOTE: "jade",
+};
+const variantNames: Record<string, string> = {
+  CAUTION: "CAUTION",
+  TIP: "TIP",
+  NOTE: "NOTE",
 };
 
 let { token } = Astro.props;
 const variantMatch = token.raw.match(variantPattern);
 let color: BlockquoteProps["color"];
+let name: string;
 
 if (variantMatch) {
-  const name = variantMatch[1];
+  const type = variantMatch[1];
 
-  if (name in variants) {
-    color = variants[name as keyof typeof variants];
+  if (type in variantColors) {
+    color = variantColors[type as keyof typeof variantColors];
+    name = variantNames[type as keyof typeof variantNames];
     [token] = lexer(token.raw.slice(variantMatch[0].length));
   } else {
-    throw new Error(`Unknown blockquote variant: ${name}`);
+    throw new Error(`Unknown blockquote variant: ${type}`);
   }
+} else {
+  throw new Error("Missing blockquote variant");
 }
 ---
 
-<Blockquote {color}>
-  <TokensRenderer tokens={token.tokens} />
-</Blockquote>
+<Flex direction="column" align="start" mb="4">
+  <Box
+    style={{
+      backgroundColor: `var(--${color}-9)`,
+    }}
+  >
+    <Code
+      {color}
+      variant="solid"
+      style={{
+        background: "none",
+        display: "flex",
+        alignItems: "center",
+        gap: "var(--space-1)",
+        padding: "var(--space-1) var(--space-3)",
+      }}
+    >
+      <ExclamationTriangleIcon width="1em" height="1em" />
+      {name}
+    </Code>
+  </Box>
+
+  <Flex gap="2">
+    <Box
+      width="var(--space-1)"
+      style={{ backgroundColor: `var(--${color}-a5)` }}
+    />
+
+    <Text my="2">
+      <TokensRenderer tokens={token.tokens} />
+    </Text>
+  </Flex>
+</Flex>
