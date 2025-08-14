@@ -1,5 +1,6 @@
 ---
-import { Box, Flex, Link, Text } from "@radix-ui/themes";
+import { repeat } from "lodash-es";
+import { Box, Code, Flex, Link, Text } from "@radix-ui/themes";
 import { pageMaxWidth } from "../layouts/BaseLayout.astro";
 import { WriterLogo } from "./WriterLogo";
 import {
@@ -10,28 +11,35 @@ import {
   PersonIcon,
   RocketIcon,
 } from "@radix-ui/react-icons";
+
+const coolText = "TRèSaBHi";
+const coolTextCount = 4;
+const heuristicHeight = 84;
 ---
 
 <style>
   #navbar {
-    transition-duration: 200ms;
+    --transition-duration: 400ms;
+
+    transition-duration: var(--transition-duration);
     position: fixed;
     width: 100%;
     top: 0;
-    background-color: var(--gray-a2);
+    background-color: var(--gray-2);
     box-shadow: var(--shadow-2);
-    padding: var(--space-6);
+    padding: var(--space-6) 0;
     backdrop-filter: blur(0);
   }
 
   #navbar[data-sticky="true"] {
     backdrop-filter: blur(4rem);
-    box-shadow: var(--shadow-3);
-    padding: var(--space-2);
+    background-color: var(--white-a8);
+    box-shadow: var(--shadow-4);
+    padding: var(--space-3) 0;
   }
 
   #navbar #logo {
-    transition-duration: 200ms;
+    transition-duration: var(--transition-duration);
     height: 1.25rem;
     width: calc(1.25rem * (326 / 72));
   }
@@ -43,13 +51,13 @@ import {
 
   #navbar #cool {
     user-select: none;
-    transition-duration: 200ms;
-    opacity: calc(1 / 25);
-    letter-spacing: -0.1rem;
-    transform: translate(-50%, -50%) scale(13);
+    transition-duration: var(--transition-duration);
+    opacity: calc(1 / 23);
+    transform: translate(-50%, -50%) scale(15);
     position: absolute;
     top: 50%;
     left: 50%;
+    letter-spacing: var(--letter-spacing-9);
   }
 
   #navbar[data-sticky="true"] #cool {
@@ -60,12 +68,15 @@ import {
 <script>
   const navbar = document.getElementById("navbar") as HTMLDivElement;
 
-  document.addEventListener("scroll", (event) => {
-    navbar.dataset.sticky = `${window.scrollY > 0}`;
-  });
+  function handleScroll() {
+    navbar.dataset.sticky = `${window.scrollY > navbar.clientHeight / 2}`;
+  }
+
+  handleScroll();
+  document.addEventListener("scroll", handleScroll);
 </script>
 
-<Box height="6rem" mb="6" />
+<Box height={`${heuristicHeight}px`} />
 
 <Flex id="navbar" align="center" justify="center" overflow="hidden">
   <Flex
@@ -74,16 +85,18 @@ import {
     gap="3"
     flexGrow="1"
     maxWidth={pageMaxWidth}
+    px="5"
     position="relative"
   >
-    <Text id="cool" weight="bold">WRITER</Text>
+    <Code id="cool" weight="bold">{repeat(coolText, coolTextCount)}</Code>
 
-    <Link color="gray" href="/" highContrast>
+    <Link color="gray" href="/" highContrast trim="end">
       <WriterLogo id="logo" />
     </Link>
 
     <Flex gap="3" align="center">
       <Link
+        trim="end"
         color="gray"
         highContrast
         target="_blank"
@@ -92,6 +105,7 @@ import {
         <RocketIcon width="1em" height="1em" />
       </Link>
       <Link
+        trim="end"
         color="gray"
         highContrast
         target="_blank"
@@ -100,6 +114,7 @@ import {
         <GitHubLogoIcon width="1em" height="1em" />
       </Link>
       <Link
+        trim="end"
         color="gray"
         highContrast
         target="_blank"
