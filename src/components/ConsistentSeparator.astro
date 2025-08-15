@@ -1,13 +1,27 @@
 ---
-import { Box } from "@radix-ui/themes";
+import { Box, Flex } from "@radix-ui/themes";
+import { times } from "lodash-es";
+
+const tildas = 3;
 ---
 
 <style is:global>
   .consistent-separator {
-    background-color: var(--gray-5);
-    height: 0.5px;
-    width: 100%;
+    height: 1pt;
+  }
+
+  .consistent-separator:not(.tilda) {
+    background: linear-gradient(90deg, var(--gray-6), var(--gray-3));
+    flex: 1;
+  }
+
+  .consistent-separator.tilda {
+    background-color: var(--gray-3);
+    width: var(--space-3);
   }
 </style>
 
-<Box className="consistent-separator" />
+<Flex gap="2">
+  <Box className="consistent-separator" />
+  {times(tildas, () => <Box className="consistent-separator tilda" />)}
+</Flex>

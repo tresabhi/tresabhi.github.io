@@ -14,7 +14,7 @@ import {
 
 const coolText = "WRITER";
 const coolTextCount = 4;
-const heuristicHeight = 54;
+export const APPROXIMATE_navbarHeight = 54;
 ---
 
 <style>
@@ -29,6 +29,7 @@ const heuristicHeight = 54;
     box-shadow: var(--shadow-2);
     padding: var(--space-4) 0;
     backdrop-filter: blur(0);
+    z-index: 1;
   }
 
   #navbar[data-sticky="true"] {
@@ -97,7 +98,7 @@ const heuristicHeight = 54;
   document.addEventListener("scroll", handleScroll);
 </script>
 
-<Box height={`${heuristicHeight}px`} />
+<Box height={`${APPROXIMATE_navbarHeight}px`} />
 
 <Flex id="navbar" align="center" justify="center" overflow="hidden">
   <Flex

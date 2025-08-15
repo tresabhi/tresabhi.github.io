@@ -1,13 +1,17 @@
 ---
 import {
   Badge,
+  Box,
   Flex,
   Heading,
+  Link,
   Text,
   type HeadingProps,
 } from "@radix-ui/themes";
 import type { Tokens } from "marked";
+import { slug } from "../core/slug";
 import ConsistentSeparator from "./ConsistentSeparator.astro";
+import { APPROXIMATE_navbarHeight } from "./Navbar.astro";
 import type { TokenRendererProps } from "./TokenRenderer.astro";
 import TokensRenderer from "./TokensRenderer.astro";
 
@@ -21,22 +25,52 @@ const timeFormat: Intl.DateTimeFormatOptions = {
   month: "short",
   day: "numeric",
 };
+
+const id = slug(token.text);
+const href = `#${id}`;
 ---
 
 <style>
   .heading {
     letter-spacing: var(--letter-spacing-9);
   }
+
+  .anchor {
+    position: absolute;
+    left: 0;
+    width: 2rem;
+    top: 50%;
+    transform: translate(-100%, -50%);
+    font-size: var(--font-size-3);
+    opacity: 0.5;
+    text-align: right;
+    padding-right: var(--space-3);
+  }
+
+  .anchor:hover {
+    opacity: 1;
+  }
 </style>
 
-<Flex direction="column" mt={isH1 ? undefined : "4"} mb={isH1 ? "6" : "4"}>
+<Flex
+  {id}
+  direction="column"
+  mt={isH1 ? undefined : "4"}
+  mb={isH1 ? "6" : "4"}
+  style={{
+    scrollMarginTop: `calc(${APPROXIMATE_navbarHeight}px + var(--space-4))`,
+  }}
+>
   <Heading
     size={`${8 - token.depth}` as HeadingProps["size"]}
     mb="0.3em"
     className="heading"
     weight="medium"
   >
-    <TokensRenderer tokens={token.tokens} {frontMatter} {fileContext} />
+    <Box position="relative">
+      <Link className="anchor" {href} color="gray">§</Link>
+      <TokensRenderer tokens={token.tokens} {frontMatter} {fileContext} />
+    </Box>
   </Heading>
 
   <ConsistentSeparator />
