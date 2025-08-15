@@ -20,7 +20,6 @@ const host = new URL(token.href).host;
 
 <Flex
   overflow="hidden"
-  width="fit-content"
   gap="3"
   align="center"
   direction="column"
@@ -30,6 +29,7 @@ const host = new URL(token.href).host;
     src={token.href}
     alt={token.text ?? `Unlabeled image from ${host}`}
   />
+
   {
     token.text && (
       <Text size="2" color="gray">
