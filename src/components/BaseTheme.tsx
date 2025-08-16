@@ -6,7 +6,7 @@ export function BaseTheme(props: ThemeProps) {
     <Theme
       accentColor="indigo"
       grayColor="mauve"
-      appearance="light"
+      appearance="dark"
       {...props}
     />
   );
