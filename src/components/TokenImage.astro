@@ -33,7 +33,7 @@ const host = new URL(token.href).host;
 
   {
     token.text && (
-      <Text size="2" color="gray">
+      <Text size="2" color="gray" align="center" wrap="pretty">
         <TokensRenderer tokens={token.tokens} />
       </Text>
     )
