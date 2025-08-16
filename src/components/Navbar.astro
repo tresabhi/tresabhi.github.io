@@ -90,8 +90,11 @@ export const APPROXIMATE_navbarHeight = 54;
 <script>
   const navbar = document.getElementById("navbar") as HTMLDivElement;
 
+  let last = window.scrollY;
   function handleScroll() {
-    navbar.dataset.sticky = `${window.scrollY > 0}`;
+    const delta = window.scrollY - last;
+    last = window.scrollY;
+    navbar.dataset.sticky = `${delta > 0}`;
   }
 
   handleScroll();
