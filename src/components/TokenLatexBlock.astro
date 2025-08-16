@@ -1,6 +1,7 @@
 ---
 import { renderToString } from "katex";
 import type { LatexBlockToken } from "../core/latexExtensions";
+import { LatexBlockWrapper } from "./LatexBlockWrapper";
 import type { TokenRendererProps } from "./TokenRenderer.astro";
 
 type Props = TokenRendererProps<LatexBlockToken>;
@@ -9,4 +10,6 @@ const { token } = Astro.props;
 const html = renderToString(token.formula, { displayMode: true });
 ---
 
-<Fragment set:html={html} />
+<LatexBlockWrapper client:idle>
+  <Fragment set:html={html} />
+</LatexBlockWrapper>

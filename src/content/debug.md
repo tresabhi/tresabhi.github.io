@@ -29,19 +29,19 @@ $$
 
 \\
 
-\Gamma_A &= \int_0^a u(-a/2) dx - \int_0^a u(a/2) dx
+&= \int_0^a u(-a/2) dx - \int_0^a u(a/2) dx
 
 \\
 
-\Gamma_A &= \int_0^a U_m - \frac{U_m}{H^2}(-a/2)^2 dx - \int_0^a U_m - \frac{U_m}{H^2}(a/2)^2 dx
+&= \int_0^a U_m - \frac{U_m}{H^2}(-a/2)^2 dx - \int_0^a U_m - \frac{U_m}{H^2}(a/2)^2 dx
 
 \\
 
-\Gamma_A &= \cancel{\int_0^a U_m - \frac{U_m a^2}{4 H^2} dx} - \cancel{\int_0^a U_m - \frac{U_m a^2}{4 H^2} dx}
+&= \cancel{\int_0^a U_m - \frac{U_m a^2}{4 H^2} dx} - \cancel{\int_0^a U_m - \frac{U_m a^2}{4 H^2} dx}
 
 \\
 
-\Gamma_A &= \boxed{0}
+&= \boxed{0}
 
 \end{align*}
 $$
@@ -55,27 +55,27 @@ $$
 
 \\
 
-\Gamma_B &= \int_0^a u(0) dx - \int_0^a u(a) dx
+&= \int_0^a u(0) dx - \int_0^a u(a) dx
 
 \\
 
-\Gamma_B &= u(0) \int_0^a dx - u(a) \int_0^a dx
+&= u(0) \int_0^a dx - u(a) \int_0^a dx
 
 \\
 
-\Gamma_B &= u(0) a - u(a) a
+&= u(0) a - u(a) a
 
 \\
 
-\Gamma_B &= a U_m - \cancel{\frac{a U_m}{H^2} \cdot 0^2} - (a U_m - \frac{a U_m}{H^2}a^2)
+&= a U_m - \cancel{\frac{a U_m}{H^2} \cdot 0^2} - (a U_m - \frac{a U_m}{H^2}a^2)
 
 \\
 
-\Gamma_B &= \cancel{a U_m} - \cancel{a U_m} + \frac{a U_m}{H^2}a^2
+&= \cancel{a U_m} - \cancel{a U_m} + \frac{a U_m}{H^2}a^2
 
 \\
 
-\Gamma_B &= \boxed{-\frac{a^3 U_m}{H^2}}
+&= \boxed{-\frac{a^3 U_m}{H^2}}
 
 
 \end{align*}
