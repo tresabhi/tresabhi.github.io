@@ -1,20 +1,13 @@
 import type { APIContext, GetStaticPaths, GetStaticPathsResult } from "astro";
 import sharp from "sharp";
-import { collectImages } from "../../../../core/collectImages";
-import { globContents } from "../../../../core/globContents";
+import { content } from "../../../../core/content";
 import { hashContent } from "../../../../core/hashContent";
 import { sourceSet } from "../../../../core/sourceSet";
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const pages = await globContents();
-  const images = new Set<string>();
+  let images = new Set<string>();
 
-  for (const [, lexer] of pages) {
-    const { tokens, frontMatter } = await lexer();
-
-    if (frontMatter.hero) images.add(frontMatter.hero);
-    for (const image of collectImages(tokens)) images.add(image);
-  }
+  for (const context of content) images = images.union(context.images);
 
   const paths: GetStaticPathsResult = [];
 

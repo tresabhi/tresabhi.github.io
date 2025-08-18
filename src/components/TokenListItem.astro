@@ -5,7 +5,7 @@ import TokensRenderer from "./TokensRenderer.astro";
 
 type Props = TokenRendererProps<Tokens.ListItem>;
 
-const { token } = Astro.props;
+const { token, context } = Astro.props;
 ---
 
-<li><TokensRenderer tokens={token.tokens} /></li>
+<li><TokensRenderer {context} tokens={token.tokens} /></li>

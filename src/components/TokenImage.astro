@@ -7,7 +7,7 @@ import TokensRenderer from "./TokensRenderer.astro";
 
 type Props = TokenRendererProps<Tokens.Image>;
 
-const { token } = Astro.props;
+const { token, context } = Astro.props;
 
 const host = new URL(token.href).host;
 ---
@@ -34,7 +34,7 @@ const host = new URL(token.href).host;
   {
     token.text && (
       <Text size="2" color="gray" align="center" wrap="pretty">
-        <TokensRenderer tokens={token.tokens} />
+        <TokensRenderer {context} tokens={token.tokens} />
       </Text>
     )
   }

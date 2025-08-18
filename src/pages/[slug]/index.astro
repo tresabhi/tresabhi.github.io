@@ -1,0 +1,29 @@
+---
+import type { GetStaticPaths, GetStaticPathsResult } from "astro";
+import Head from "../../components/Head.astro";
+import TokensRenderer from "../../components/TokensRenderer.astro";
+import { content } from "../../core/content";
+import type { Context } from "../../core/lexer";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const pages: GetStaticPathsResult = [];
+
+  for (const context of content) {
+    pages.push({ params: { slug: context.slug }, props: { context } });
+  }
+
+  return pages;
+};
+
+interface Props {
+  context: Context;
+}
+
+const { context } = Astro.props;
+---
+
+<BaseLayout>
+  <Head slot="head" {context} />
+  <TokensRenderer {context} tokens={context.tokens} />
+</BaseLayout>

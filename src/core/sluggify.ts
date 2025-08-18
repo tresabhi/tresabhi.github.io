@@ -5,7 +5,7 @@ const multipleDashesRegex = /--+/g;
 const trailingDashRegex = /-$/g;
 const leadingDashRegex = /^-/g;
 
-export function slug(value: string) {
+export function sluggify(value: string) {
   let slug = deburr(value).toLowerCase();
   slug = slug.replaceAll(nonAlphanumericRegex, "-");
   slug = slug.replaceAll(multipleDashesRegex, "-");

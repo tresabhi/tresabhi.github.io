@@ -1,15 +1,14 @@
 ---
 import type { Token } from "marked";
-import type { FrontMatter } from "../core/globContents";
-import TokenRenderer, { type FileContext } from "./TokenRenderer.astro";
+import type { Context } from "../core/lexer";
+import TokenRenderer from "./TokenRenderer.astro";
 
 interface Props {
+  context: Context;
   tokens?: Token[];
-  frontMatter: FrontMatter;
-  fileContext: FileContext;
 }
 
-const { tokens, frontMatter, fileContext } = Astro.props;
+const { context, tokens } = Astro.props;
 ---
 
 <style is:global>
@@ -23,7 +22,4 @@ const { tokens, frontMatter, fileContext } = Astro.props;
   }
 </style>
 
-{
-  tokens &&
-    tokens.map((token) => <TokenRenderer {token} {frontMatter} {fileContext} />)
-}
+{tokens && tokens.map((token) => <TokenRenderer {token} {context} />)}

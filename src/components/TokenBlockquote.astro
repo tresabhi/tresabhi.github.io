@@ -37,7 +37,7 @@ const variantIcons: Record<string, FunctionComponent<IconProps>> = {
   NOTE: ChatBubbleIcon,
 };
 
-let { token } = Astro.props;
+let { token, context } = Astro.props;
 const variantMatch = token.raw.match(variantPattern);
 let color: BlockquoteProps["color"];
 let name: string;
@@ -124,7 +124,7 @@ const tildaCount = 3;
     }}
   >
     <Text>
-      <TokensRenderer tokens={token.tokens} />
+      <TokensRenderer {context} tokens={token.tokens} />
     </Text>
   </Box>
 </Flex>

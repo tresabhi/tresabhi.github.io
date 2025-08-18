@@ -7,10 +7,14 @@ import UnorderedList from "./UnorderedList.astro";
 
 type Props = TokenRendererProps<Tokens.List>;
 
-const { token } = Astro.props;
+const { token, context } = Astro.props;
 const List = token.ordered ? OrderedList : UnorderedList;
 ---
 
 <List>
-  {(token.items as Tokens.ListItem[]).map((token) => <TokenRenderer {token} />)}
+  {
+    (token.items as Tokens.ListItem[]).map((token) => (
+      <TokenRenderer {context} {token} />
+    ))
+  }
 </List>

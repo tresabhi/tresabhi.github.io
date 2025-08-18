@@ -6,9 +6,9 @@ import TokensRenderer from "./TokensRenderer.astro";
 
 type Props = TokenRendererProps<Tokens.Strong>;
 
-const { token } = Astro.props;
+const { token, context } = Astro.props;
 ---
 
 <Text weight="medium">
-  <TokensRenderer tokens={token.tokens} />
+  <TokensRenderer {context} tokens={token.tokens} />
 </Text>

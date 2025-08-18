@@ -6,7 +6,7 @@ import TokensRenderer from "./TokensRenderer.astro";
 
 type Props = TokenRendererProps<Tokens.Link>;
 
-const { token } = Astro.props;
+const { token, context } = Astro.props;
 const isExternal = token.href.startsWith("http");
 ---
 
@@ -15,5 +15,5 @@ const isExternal = token.href.startsWith("http");
   underline="always"
   target={isExternal ? "_blank" : "_self"}
 >
-  <TokensRenderer tokens={token.tokens} />
+  <TokensRenderer {context} tokens={token.tokens} />
 </Link>

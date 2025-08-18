@@ -6,9 +6,9 @@ import TokensRenderer from "./TokensRenderer.astro";
 
 type Props = TokenRendererProps<Tokens.Paragraph>;
 
-const { token } = Astro.props;
+const { token, context } = Astro.props;
 ---
 
 <Text wrap="pretty" mb="4">
-  <TokensRenderer tokens={token.tokens} />
+  <TokensRenderer {context} tokens={token.tokens} />
 </Text>

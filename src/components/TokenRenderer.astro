@@ -1,6 +1,6 @@
 ---
 import { type Token, type Tokens } from "marked";
-import type { FrontMatter } from "../core/globContents";
+import type { Context } from "../core/lexer";
 import TokenBlockquote from "./TokenBlockquote.astro";
 import TokenCode from "./TokenCode.astro";
 import TokenCodeSpan from "./TokenCodeSpan.astro";
@@ -15,7 +15,6 @@ import TokenLink from "./TokenLink.astro";
 import TokenList from "./TokenList.astro";
 import TokenListItem from "./TokenListItem.astro";
 import TokenParagraph from "./TokenParagraph.astro";
-import TokenParametricMacro from "./TokenParametricMacro.astro";
 import TokenSpace from "./TokenSpace.astro";
 import TokenStrong from "./TokenStrong.astro";
 import TokenTable from "./TokenTable.astro";
@@ -23,8 +22,7 @@ import TokenText from "./TokenText.astro";
 
 interface Props {
   token: Token;
-  frontMatter: FrontMatter;
-  fileContext: FileContext;
+  context: Context;
 }
 
 export interface FileContext {
@@ -33,11 +31,10 @@ export interface FileContext {
 
 export interface TokenRendererProps<Type> {
   token: Type | Tokens.Generic;
-  frontMatter: FrontMatter;
-  fileContext: FileContext;
+  context: Context;
 }
 
-const { token, frontMatter, fileContext } = Astro.props;
+const { token, context } = Astro.props;
 const Components = {
   space: TokenSpace,
   text: TokenText,
@@ -57,7 +54,6 @@ const Components = {
   list_item: TokenListItem,
   latex_block: TokenLatexBlock,
   latex_inline: TokenLatexInline,
-  parametricmacro: TokenParametricMacro,
 };
 
 let Component;
@@ -69,5 +65,5 @@ if (token.type in Components) {
 }
 ---
 
-{/* @ts-ignore typescript stack limit reach lmao */}
-<Component {token} {frontMatter} {fileContext} />
+{/* @ts-ignore typescript stack limit reach lol */}
+<Component {token} {context} />

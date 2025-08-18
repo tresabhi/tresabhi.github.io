@@ -5,7 +5,7 @@ import TokensRenderer from "./TokensRenderer.astro";
 
 type Props = TokenRendererProps<Tokens.Del>;
 
-const { token } = Astro.props;
+const { token, context } = Astro.props;
 ---
 
-<sub><TokensRenderer tokens={token.tokens} /></sub>
+<sub><TokensRenderer {context} tokens={token.tokens} /></sub>

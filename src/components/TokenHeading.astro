@@ -9,7 +9,7 @@ import {
   type HeadingProps,
 } from "@radix-ui/themes";
 import type { Tokens } from "marked";
-import { slug } from "../core/slug";
+import { sluggify } from "../core/sluggify";
 import ConsistentSeparator from "./ConsistentSeparator.astro";
 import { APPROXIMATE_navbarHeight } from "./Navbar.astro";
 import type { TokenRendererProps } from "./TokenRenderer.astro";
@@ -17,7 +17,7 @@ import TokensRenderer from "./TokensRenderer.astro";
 
 type Props = TokenRendererProps<Tokens.Heading>;
 
-const { token, frontMatter, fileContext } = Astro.props;
+const { token, context } = Astro.props;
 const isH1 = token.depth === 1;
 
 const timeFormat: Intl.DateTimeFormatOptions = {
@@ -26,7 +26,7 @@ const timeFormat: Intl.DateTimeFormatOptions = {
   day: "numeric",
 };
 
-const id = slug(token.text);
+const id = sluggify(token.text);
 const href = `#${id}`;
 ---
 
@@ -38,8 +38,8 @@ const href = `#${id}`;
   .anchor {
     position: absolute;
     left: 0;
-    top: 50%;
-    transform: translate(-100%, -50%);
+    top: 0;
+    transform: translateX(-100%);
     width: var(--space-5);
     font-size: var(--font-size-3);
     opacity: 0.5;
@@ -68,7 +68,7 @@ const href = `#${id}`;
   >
     <Box position="relative">
       <Link className="anchor" {href} color="gray">§</Link>
-      <TokensRenderer tokens={token.tokens} {frontMatter} {fileContext} />
+      <TokensRenderer {context} tokens={token.tokens} />
     </Box>
   </Heading>
 
@@ -78,12 +78,12 @@ const href = `#${id}`;
     isH1 && (
       <Flex mt="3" align="center" justify="between">
         <Text size="2" color="gray">
-          {fileContext.created.toLocaleDateString(undefined, timeFormat)}
+          {context.created.toLocaleDateString(undefined, timeFormat)}
         </Text>
 
-        {frontMatter.tags && (
+        {context.frontMatter.tags && (
           <Flex gap="2">
-            {frontMatter.tags.map((tag) => (
+            {context.frontMatter.tags.map((tag) => (
               <Badge variant="surface">{tag}</Badge>
             ))}
           </Flex>

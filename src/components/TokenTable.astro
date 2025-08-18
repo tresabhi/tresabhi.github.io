@@ -6,7 +6,7 @@ import TokensRenderer from "./TokensRenderer.astro";
 
 type Props = TokenRendererProps<Tokens.Table>;
 
-const { token } = Astro.props;
+const { token, context } = Astro.props;
 ---
 
 <Table.Root mb="6">
@@ -15,7 +15,7 @@ const { token } = Astro.props;
       {
         (token.header as Tokens.Generic[]).map((cell) => (
           <Table.ColumnHeaderCell>
-            <TokensRenderer tokens={cell.tokens} />
+            <TokensRenderer {context} tokens={cell.tokens} />
           </Table.ColumnHeaderCell>
         ))
       }
@@ -28,7 +28,7 @@ const { token } = Astro.props;
         <Table.Row>
           {row.map((cell) => (
             <Table.Cell>
-              <TokensRenderer tokens={cell.tokens} />
+              <TokensRenderer {context} tokens={cell.tokens} />
             </Table.Cell>
           ))}
         </Table.Row>
