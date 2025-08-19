@@ -1,23 +1,16 @@
-import { load } from "js-yaml";
 import {
   lexer as _lexer,
+  use,
   type Token,
   type Tokens,
   type TokensList,
 } from "marked";
-import z from "zod";
+import type { FrontMatter } from "./content";
 import { fail } from "./fail";
 import { git } from "./git";
+import { latexBlockExtension, latexInlineExtension } from "./latexExtensions";
 import { makeDate } from "./makeDate";
 import { sluggify } from "./sluggify";
-
-const FRONT_MATTER_DELIMITER = "---";
-
-const FrontMatter = z.object({
-  tags: z.optional(z.array(z.string())),
-});
-
-export type FrontMatter = z.infer<typeof FrontMatter>;
 
 export interface Context {
   frontMatter: FrontMatter;
@@ -31,24 +24,9 @@ export interface Context {
   created: Date;
 }
 
+use({ extensions: [latexBlockExtension, latexInlineExtension] });
+
 export async function lexer(file: string, content: string) {
-  content = content.replaceAll("\r\n", "\n");
-
-  let frontMatter: FrontMatter = {};
-
-  if (content.startsWith(`${FRONT_MATTER_DELIMITER}\n`)) {
-    content = content.slice(FRONT_MATTER_DELIMITER.length + 1);
-    const index = content.indexOf(`${FRONT_MATTER_DELIMITER}\n`);
-
-    if (index === -1) {
-      throw new Error("No second front matter delimiter found");
-    }
-
-    const frontMatterContent = content.slice(0, index);
-    content = content.slice(index + FRONT_MATTER_DELIMITER.length + 2);
-    frontMatter = FrontMatter.parse(load(frontMatterContent));
-  }
-
   const tokens = _lexer(content);
 
   const h0 =
@@ -81,12 +59,11 @@ export async function lexer(file: string, content: string) {
   explore(tokens);
 
   return {
-    frontMatter,
     tokens,
     slug,
     title,
     description,
     created,
     images,
-  } satisfies Context;
+  } satisfies Omit<Context, "frontMatter">;
 }

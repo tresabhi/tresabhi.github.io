@@ -10,6 +10,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const pages: GetStaticPathsResult = [];
 
   for (const context of content) {
+    if (context.frontMatter.draft && import.meta.env.MODE === "production") {
+      continue;
+    }
+
     pages.push({ params: { slug: context.slug }, props: { context } });
   }
 

@@ -1,15 +1,17 @@
-import { readdir, readFile } from "fs/promises";
+import { getCollection, type InferEntrySchema } from "astro:content";
 import { lexer, type Context } from "./lexer";
 
-const ROOT = "src/content";
-
-const files = await readdir(ROOT);
+const collection = await getCollection("posts");
 export const content: Context[] = [];
 
-for (const file of files) {
-  const path = `${ROOT}/${file}`;
-  const source = await readFile(path, "utf-8");
-  const context = await lexer(path, source);
+export type FrontMatter = InferEntrySchema<"posts">;
 
-  content.push(context);
+for (const item of collection) {
+  if (!item.filePath) throw new Error("Missing file path");
+  if (!item.body) throw new Error("Missing body");
+
+  const frontMatter = item.data;
+  const context = await lexer(item.filePath, item.body);
+
+  content.push({ ...context, frontMatter });
 }
