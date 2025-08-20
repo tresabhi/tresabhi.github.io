@@ -1,7 +1,3 @@
----
-draft: true
----
-
 # KitScore
 
 A scoring system for evaluating performance indirectly from adjacent files.
@@ -155,9 +151,8 @@ w_\text{kills} =& \left[ R^2_{\text{kills} ~ \Leftrightarrow ~ \text{damage}} + 
 \end{align*}
 $$
 
-## Shipping Data
-
-Once you have your weights, you can safely discard the $R^2$ corelation matrix and all rows of the polynomial matrix but the once that corelate $b_0$ to the rest of the statistics. The one remaining row of coefficient and the weights is all the data you need to calculate KitScore.
+> [!TIP]
+> Once you have your weights, you can safely discard the $R^2$ corelation matrix and all rows of the polynomial matrix but the once that corelate $b_0$ to the rest of the statistics. The one remaining row of coefficient and the weights is all the data you need to calculate KitScore.
 
 $$
 A = \frac{
