@@ -154,18 +154,20 @@ $$
 > [!TIP]
 > Once you have your weights, you can safely discard the $R^2$ corelation matrix and all rows of the polynomial matrix but the once that corelate $b_0$ to the rest of the statistics. The one remaining row of coefficient and the weights is all the data you need to calculate KitScore.
 
+## $b_0$ Approximation
+
+When given a new observation (i.e. the observation you are trying to evaluate), each statistic, using its polynomial coefficients, approximates $b_0$. Here, $x_n$ is the statistic $n$ of the new observed state vector being judged.
+
+$$
+a_n = \sum_{k = 0}^K c_k x_n^k
+$$
+
+Once the atomic approximations have been calculated, you can calculate the anticipated value of $b_0$ using a weighted average.
+
 $$
 A = \frac{
   \sum_{n=0}^N w_n a_n
 }{
   \sum_{n=0}^N w_n
 }
-$$
-
-$$
-w_n = \left[ \sum_{m=0}^N R_{n \implies m}^2 \right]^{-1}
-$$
-
-$$
-a_n = \sum_{k = 0}^K c_k x_n^k
 $$
