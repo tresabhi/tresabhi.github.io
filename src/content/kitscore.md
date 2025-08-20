@@ -98,9 +98,66 @@ In the case of World of Tanks Blitz, statistics collected with the intent of cal
 
 In the end, we will end up with thousands of state vectors for each tank, contributed by many players.
 
+## Corelating Data
+
+After a sufficiently large pool of data has been collected, we must calculate polynomials of order $K$ that best corelate the statistics with one another. These coefficients can we wrapped by and represented cleanly as a vector $C$ of length $K + 1$. Use [the polynomial regression using least squares method](https://en.wikipedia.org/wiki/Polynomial_regression).
+
 $$
-K = 4
+C = \left[ c_0, c_1, c_2, \cdots, c_K \right]
 $$
+
+In the case of World of Tanks Blitz, you would plot the points of and calculate the polynomial of best fit for all combinations of statistics. Of course there is no point in creating polynomials for a statistic with itself (like $wins$ and $wins$), that would not contain any useful information.
+
+|          | $wins$   | $damage$                                 | $kills$                                   | $spots$                                   | $\cdots$ |
+| -------- | -------- | ---------------------------------------- | ----------------------------------------- | ----------------------------------------- | -------- |
+| $wins$   | -        | $C_{\text{damage} \implies \text{wins}}$ | $C_{\text{kills} \implies \text{wins}}$   | $C_{\text{spots} \implies \text{wins}}$   | $\cdots$ |
+| $damage$ | -        | -                                        | $C_{\text{kills} \implies \text{damage}}$ | $C_{\text{spots} \implies \text{damage}}$ | $\cdots$ |
+| $kills$  | -        | -                                        | -                                         | $C_{\text{spots} \implies \text{kills}}$  | $\cdots$ |
+| $spots$  | -        | -                                        | -                                         | -                                         | $\cdots$ |
+| $\vdots$ | $\vdots$ | $\vdots$                                 | $\vdots$                                  | $\vdots$                                  | $\ddots$ |
+
+> [!TIP]
+> Make sure you make a wise decision on the degree of the polynomials. For World of Tanks Blitz, I recommend a degree of $K = 4$.
+
+Once you have the corelation matrix corelating all statistics with one another, you can calculate the $R^2$ value for each statistic with one another using [the coefficient of determination method](https://en.wikipedia.org/wiki/Coefficient_of_determination). In the case of World of Tanks Blitz, the matrix for this will look identical to the one before but now with $R^2$ values and a diagonal of $1$.
+
+|          | $wins$   | $damage$                                              | $kills$                                                | $spots$                                                | $\cdots$ |
+| -------- | -------- | ----------------------------------------------------- | ------------------------------------------------------ | ------------------------------------------------------ | -------- |
+| $wins$   | $1$      | $R^2_{\text{damage} ~ \Leftrightarrow ~ \text{wins}}$ | $R^2_{\text{kills} ~ \Leftrightarrow ~ \text{wins}}$   | $R^2_{\text{spots} ~ \Leftrightarrow ~ \text{wins}}$   | $\cdots$ |
+| $damage$ | -        | $1$                                                   | $R^2_{\text{kills} ~ \Leftrightarrow ~ \text{damage}}$ | $R^2_{\text{spots} ~ \Leftrightarrow ~ \text{damage}}$ | $\cdots$ |
+| $kills$  | -        | -                                                     | $1$                                                    | $R^2_{\text{spots} ~ \Leftrightarrow ~ \text{kills}}$  | $\cdots$ |
+| $spots$  | -        | -                                                     | -                                                      | $1$                                                    | $\cdots$ |
+| $\vdots$ | $\vdots$ | $\vdots$                                              | $\vdots$                                               | $\vdots$                                               | $\ddots$ |
+
+## Weights
+
+Weights for the impact of statistics on $b_0$ can be calculated using the following equation. Here, $n$ is the statistic in question and $m$ is an iterator of all statistics including $n$ but excluding $b_0$ since that is the target statistic.
+
+$$
+w_n = \left[ \sum_{m = 1}^N R^2_{n ~ \Leftrightarrow ~ m} \right]^{-1}
+$$
+
+For example, in World of Tanks Blitz, the weight for $kills$ would follow this pattern:
+
+$$
+w_\text{kills} = \left[ R^2_{\text{kills} ~ \Leftrightarrow ~ \text{damage}} + R^2_{\text{kills} ~ \Leftrightarrow ~ \text{kills}} + R^2_{\text{kills} ~ \Leftrightarrow ~ \text{spots}} + \cdots \right]^{-1}
+$$
+
+Note that $R^2_{\text{kills} ~ \Leftrightarrow ~ \text{kills}}$ or any $R^2_{n ~ \Leftrightarrow ~ m}$ where $n = m$ will equal $1$.
+
+$$
+\begin{align*}
+
+w_\text{kills} =& \left[ R^2_{\text{kills} ~ \Leftrightarrow ~ \text{damage}} + \cancel{R^2_{\text{kills} ~ \Leftrightarrow ~ \text{kills}}} + R^2_{\text{kills} ~ \Leftrightarrow ~ \text{spots}} + \cdots \right]^{-1} \\
+
+=& \left[ R^2_{\text{kills} ~ \Leftrightarrow ~ \text{damage}} + 1 + R^2_{\text{kills} ~ \Leftrightarrow ~ \text{spots}} + \cdots \right]^{-1}
+
+\end{align*}
+$$
+
+## Shipping Data
+
+Once you have your weights, you can safely discard the $R^2$ corelation matrix and all rows of the polynomial matrix but the once that corelate $b_0$ to the rest of the statistics. The one remaining row of coefficient and the weights is all the data you need to calculate KitScore.
 
 $$
 A = \frac{
@@ -111,7 +168,7 @@ A = \frac{
 $$
 
 $$
-w_n = \left[ \sum_{m=0}^N R_{n ~ \leftrightarrow ~ m}^2 \right]^{-1}
+w_n = \left[ \sum_{m=0}^N R_{n \implies m}^2 \right]^{-1}
 $$
 
 $$
