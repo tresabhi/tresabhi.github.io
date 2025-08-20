@@ -25,3 +25,5 @@ pnpm-debug.log*
 
 public/fonts
 public/styles
+
+test.*

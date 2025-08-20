@@ -2,6 +2,101 @@
 
 A scoring system for evaluating performance indirectly from adjacent files.
 
+## High-Level Overview
+
+The big idea behind KitScore is to predict the win rate of a player using all recorded statistics but the win rate itself. In other words, we will use kills, spots, damage, damage received, etc. to predict the win rate.
+
+Training an AI model to do so would be the most accurate way to achieve, however, that will make it practically impossible to glean information from the data, loosing out on any opportunities to provide the player with useful feedback.
+
+To resolve this, I developed and integrated KitScore into BlitzKit to not just predict the win rate to compare to the actual win rate, but also generate an arbitrary $[0, 200]$ score where $100$ represents the average player.
+
+Loosely speaking, we start off by deciding what statistics we will be using to predict win rate. For World of Tanks Blitz, here are the statistics BlitzKit considers:
+
+| Used | Name                     | Memo                                                                                                                             |
+| ---- | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------- |
+| 🟢   | `battles`                | This will be used to normalize all other statistics.                                                                             |
+| 🟢   | `capture_points`         | Cumulative.                                                                                                                      |
+| 🟢   | `damage_dealt`           | Cumulative.                                                                                                                      |
+| 🟢   | `damage_received`        | Cumulative.                                                                                                                      |
+| 🟢   | `dropped_capture_points` | Cumulative.                                                                                                                      |
+| 🟢   | `frags`                  | Cumulative.                                                                                                                      |
+| 🔴   | `frags8p`                | Only applies to tanks of tier 8 or greater. Do not use.                                                                          |
+| 🟢   | `hits`                   | Cumulative.                                                                                                                      |
+| 🔴   | `losses`                 | Antonym of wins. This statistic's weight will end up being massive compared to all others and will overpower them.               |
+| 🔴   | `max_frags`              | Not cumulative.                                                                                                                  |
+| 🔴   | `max_xp`                 | Not cumulative.                                                                                                                  |
+| 🟢   | `shots`                  | Cumulative.                                                                                                                      |
+| 🟢   | `spotted`                | Cumulative.                                                                                                                      |
+| 🟢   | `survived_battles`       | Cumulative.                                                                                                                      |
+| 🔴   | `win_and_survived`       | Encodes the union of survival and winning. This will pollute the weights.                                                        |
+| 🟢   | `wins`                   | The target statistic.                                                                                                            |
+| 🔴   | `xp`                     | Encodes too much information about all other recorded statistics and increments in game modes even when others statistics don't. |
+
+With a decent selection of usable statistics in mind, collect thousands of points of data of preexisting observations for each tank separately. In other words, simply scrape the Wargaming API, collecting player statistics on all tanks, grouped by tanks. In the end, your observations can be represented as a collection of vectors $V$ forming a matrix of size $N \times M$ where $N$ is the number of statistics and $M$ is the number of observations for each tank.
+
+$$
+\begin{bmatrix}
+\text{battles} \\
+\text{wins} \\
+\text{damage\_dealt} \\
+\text{frags} \\
+\vdots
+\end{bmatrix}
+
+\implies
+
+\begin{bmatrix}
+21     & 4      & 73     & \cdots \\
+10     & 0      & 29     & \cdots \\
+42069  & 4311   & 131411 & \cdots \\
+19     & 1      & 69     & \cdots \\
+\vdots & \vdots & \vdots & \ddots
+\end{bmatrix}
+$$
+
+Since statistics in World of Tanks Blitz are cumulative, normalize the data by the number of battles.
+
+$$
+\begin{bmatrix}
+\text{wins} \\
+\text{damage\_dealt} \\
+\text{frags} \\
+\vdots
+\end{bmatrix}
+
+\implies
+
+\begin{bmatrix}
+10 / 21    & 0 / 4    & 29 / 73     & \cdots \\
+42069 / 21 & 4311 / 4 & 131411 / 73 & \cdots \\
+19 / 21    & 1 / 4    & 69 / 73     & \cdots \\
+\vdots     & \vdots   & \vdots      & \ddots
+\end{bmatrix}
+
+=
+
+\begin{bmatrix}
+0.5    & 0.0    & 0.4    & \cdots \\
+2003.3 & 1077.8 & 1800.2 & \cdots \\
+0.9    & 0.3    & 0.9    & \cdots \\
+\vdots & \vdots & \vdots & \ddots
+\end{bmatrix}
+$$
+
+With thousands, possibly even millions of observations, we can now construct polynomials of least squares to corelate all statistics with one another. It is helpful to construct a cohort table to visualize the data. In other words, we will plot each statistic to approximate all other statistics.
+
+Use [the polynomial regression using least squares method](https://en.wikipedia.org/wiki/Polynomial_regression). For World of Tanks Blitz, I recommend a polynomial of order $K = 4$. Note that the diagonal where we compare statistics with itself is redundant, so feel free to omit it and assume a basic linear trend.
+
+|              | wins                                                     | damage_dealt                                                     | frags                                              | spots                                              | $\cdots$ |
+| ------------ | -------------------------------------------------------- | ---------------------------------------------------------------- | -------------------------------------------------- | -------------------------------------------------- | -------- |
+| wins         | ![wins to wins](https://i.imgur.com/d69IZLN.png)         | -                                                                | -                                                  | -                                                  | $\cdots$ |
+| damage_dealt | ![damage_dealt to wins](https://i.imgur.com/P2pU3Ai.png) | ![damage_dealt to damage_dealt](https://i.imgur.com/d69IZLN.png) | -                                                  | -                                                  | $\cdots$ |
+| frags        | ![frags to wins](https://i.imgur.com/KyjRIx5.png)        | ![frags to damage_dealt](https://i.imgur.com/riev1LB.png)        | ![frags to frags](https://i.imgur.com/d69IZLN.png) | -                                                  | $\cdots$ |
+| spots        | ![spots to wins](https://i.imgur.com/KyjRIx5.png)        | ![spots to damage_dealt](https://i.imgur.com/hnM7YZk.png)        | ![spots to frags](https://i.imgur.com/hnM7YZk.png) | ![spots to spots](https://i.imgur.com/d69IZLN.png) | $\cdots$ |
+| $\vdots$     | $\vdots$                                                 | $\vdots$                                                         | $\vdots$                                           | $\vdots$                                           | $\ddots$ |
+
+## KitScore vs. WN8/WN7
+
 ## Sanitizing Data
 
 Let $V$ represent a player state vector composed of $N$ statistics. These are the pieces of information representing the performance of a player.
@@ -166,8 +261,8 @@ Once the atomic approximations have been calculated, you can calculate the antic
 
 $$
 A = \frac{
-  \sum_{n=0}^N w_n a_n
+ \sum_{n=0}^N w_n a_n
 }{
-  \sum_{n=0}^N w_n
+ \sum_{n=0}^N w_n
 }
 $$

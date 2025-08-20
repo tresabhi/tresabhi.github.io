@@ -1,10 +1,5 @@
-import {
-  lexer as _lexer,
-  use,
-  type Token,
-  type Tokens,
-  type TokensList,
-} from "marked";
+import { lexer as _lexer, use, type Tokens, type TokensList } from "marked";
+import { collectImages } from "./collectImages";
 import type { FrontMatter } from "./content";
 import { fail } from "./fail";
 import { git } from "./git";
@@ -47,16 +42,7 @@ export async function lexer(file: string, content: string) {
     .log({ file, n: 1, "--diff-filter": "A" })
     .then((log) => makeDate(log.latest?.date));
 
-  const images = new Set<string>();
-
-  function explore(tokens: Token[]) {
-    for (const token of tokens) {
-      if (token.type === "image") images.add(token.href);
-      if ("tokens" in token && token.tokens) explore(token.tokens);
-    }
-  }
-
-  explore(tokens);
+  const images = collectImages(tokens);
 
   return {
     tokens,
