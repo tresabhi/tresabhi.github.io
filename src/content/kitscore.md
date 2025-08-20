@@ -95,6 +95,16 @@ Use [the polynomial regression using least squares method](https://en.wikipedia.
 | spots        | ![spots to wins](https://i.imgur.com/KyjRIx5.png)        | ![spots to damage_dealt](https://i.imgur.com/hnM7YZk.png)        | ![spots to frags](https://i.imgur.com/hnM7YZk.png) | ![spots to spots](https://i.imgur.com/d69IZLN.png) | $\cdots$ |
 | $\vdots$     | $\vdots$                                                 | $\vdots$                                                         | $\vdots$                                           | $\vdots$                                           | $\ddots$ |
 
+Once you have the corelation matrix corelating all statistics with one another, you can calculate the $R^2$ value for each statistic with one another using [the coefficient of determination method](https://en.wikipedia.org/wiki/Coefficient_of_determination). In the case of World of Tanks Blitz, the matrix for this will look identical to the one before but now with $R^2$ values and a diagonal of $1$.
+
+|              | wins     | damage_dealt | frags    | spots    | $\cdots$ |
+| ------------ | -------- | ------------ | -------- | -------- | -------- |
+| wins         | $1.000$  | -            | -        | -        | $\cdots$ |
+| damage_dealt | $0.721$  | $1.000$      | -        | -        | $\cdots$ |
+| frags        | $0.566$  | $0.030$      | $1.000$  | -        | $\cdots$ |
+| spots        | $0.658$  | $0.192$      | $0.020$  | $1.000$  | $\cdots$ |
+| $\vdots$     | $\vdots$ | $\vdots$     | $\vdots$ | $\vdots$ | $\ddots$ |
+
 ## KitScore vs. WN8/WN7
 
 ## Sanitizing Data
