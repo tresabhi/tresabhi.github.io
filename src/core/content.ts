@@ -13,5 +13,7 @@ for (const item of collection) {
   const frontMatter = item.data;
   const context = await lexer(item.filePath, item.body);
 
+  if (frontMatter.hero) context.images.add(frontMatter.hero);
+
   content.push({ ...context, frontMatter });
 }

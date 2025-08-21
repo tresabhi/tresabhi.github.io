@@ -8,6 +8,12 @@ export const pageMaxWidth: FlexProps["maxWidth"] = {
   sm: "min(45rem, 100%)",
   md: "min(60rem, 100%)",
 };
+
+interface Props {
+  maxWidth?: FlexProps["maxWidth"];
+}
+
+const { maxWidth = pageMaxWidth } = Astro.props;
 ---
 
 <html lang="en">
@@ -51,14 +57,7 @@ export const pageMaxWidth: FlexProps["maxWidth"] = {
         <Navbar />
 
         <Flex justify="center">
-          <Flex
-            mb="7"
-            px="5"
-            py="6"
-            flexGrow="1"
-            direction="column"
-            maxWidth={pageMaxWidth}
-          >
+          <Flex mb="7" px="5" py="6" flexGrow="1" direction="column" {maxWidth}>
             <slot />
           </Flex>
         </Flex>
