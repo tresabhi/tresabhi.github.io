@@ -1,3 +1,7 @@
+---
+draft: true
+---
+
 # Debug
 
 This is the debugging page for Markdown containing a lot of elements, components, and complexity.

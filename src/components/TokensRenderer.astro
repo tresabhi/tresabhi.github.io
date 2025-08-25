@@ -17,6 +17,10 @@ const { context, tokens } = Astro.props;
     gap: var(--space-5);
   }
 
+  section[horizontal] > span > * {
+    flex: 1;
+  }
+
   colored[blue] {
     color: var(--blue-9);
   }

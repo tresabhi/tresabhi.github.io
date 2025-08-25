@@ -1,3 +1,7 @@
+---
+hero: https://i.imgur.com/9VqK5H0.png
+---
+
 # KitScore
 
 A scoring system for evaluating performance indirectly from adjacent files.

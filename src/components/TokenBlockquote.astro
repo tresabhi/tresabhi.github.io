@@ -71,12 +71,10 @@ const tildaCount = 3;
     <svg height="1.75rem" viewBox={`0 0 ${tildaWidth} ${tildaHeight}`}>
       <polygon
         {fill}
-        points={`
-          ${tildaWidth} 0,
-          ${2 * tildaWidth} 0,
-          ${tildaWidth} ${tildaHeight},
-          ${0} ${tildaHeight},
-        `}></polygon>
+        points={`${tildaWidth} 0,` +
+          `${2 * tildaWidth} 0,` +
+          `${tildaWidth} ${tildaHeight},` +
+          `${0} ${tildaHeight}`}></polygon>
     </svg>
 
     <Flex align="center" style={{ backgroundColor: fill }} px="1">
@@ -103,12 +101,12 @@ const tildaCount = 3;
         times(tildaCount, (i) => {
           return (
             <polygon
-              points={`
-                ${i * (tildaWidth + tildaSpace)} 0,
-                ${i * (tildaWidth + tildaSpace) + tildaWidth} 0,
-                ${i * (tildaWidth + tildaSpace)} ${tildaHeight},
-                ${i * (tildaWidth + tildaSpace) - tildaWidth} ${tildaHeight},
-              `}
+              points={
+                `${i * (tildaWidth + tildaSpace)} 0,` +
+                `${i * (tildaWidth + tildaSpace) + tildaWidth} 0,` +
+                `${i * (tildaWidth + tildaSpace)} ${tildaHeight},` +
+                `${i * (tildaWidth + tildaSpace) - tildaWidth} ${tildaHeight}`
+              }
               {fill}
             />
           );

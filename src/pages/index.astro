@@ -10,15 +10,23 @@ const filtered = content.filter((post) => !post.frontMatter.draft);
 <style>
   .post .wrapper {
     background-color: var(--gray-3);
-    border-radius: var(--radius-6);
     overflow: hidden;
     height: 100%;
   }
 
-  .post .wrapper .hero {
+  .post .wrapper .hero-wrapper {
+    aspect-ratio: 2 / 1;
+    position: relative;
+  }
+
+  .post .wrapper .hero-wrapper .hero {
     background-size: cover;
     background-position: center;
-    aspect-ratio: 2 / 1;
+    width: 100px;
+    height: 100px !important;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 
   .post .wrapper .title {
@@ -28,7 +36,7 @@ const filtered = content.filter((post) => !post.frontMatter.draft);
   }
 
   .post .wrapper .description {
-    max-height: 5rem;
+    max-height: 6rem;
     overflow: hidden;
     position: relative;
   }
@@ -64,13 +72,15 @@ const filtered = content.filter((post) => !post.frontMatter.draft);
             href={`/${post.slug}`}
           >
             <Flex direction="column" className="wrapper">
-              {post.frontMatter.hero && (
-                <ResponsiveImage
-                  src={post.frontMatter.hero}
-                  alt={`Hero image for the article "${post.title}"`}
-                  class:list="hero"
-                />
-              )}
+              <Box className="hero-wrapper">
+                {post.frontMatter.hero && (
+                  <ResponsiveImage
+                    class:list="hero-wrapper"
+                    src={post.frontMatter.hero}
+                    alt={`Hero image for the article "${post.title}"`}
+                  />
+                )}
+              </Box>
 
               <Flex direction="column" gap="3" p="4">
                 <Text className="title" size="5" weight="medium">

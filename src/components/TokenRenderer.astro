@@ -38,6 +38,7 @@ const { token, context } = Astro.props;
 const Components = {
   space: TokenSpace,
   text: TokenText,
+  escape: TokenText,
   html: TokenHtml,
   heading: TokenHeading,
   paragraph: TokenParagraph,
@@ -61,6 +62,7 @@ let Component;
 if (token.type in Components) {
   Component = Components[token.type as keyof typeof Components];
 } else {
+  console.error(token);
   throw new Error(`Unsupported token type: ${token.type}`);
 }
 ---

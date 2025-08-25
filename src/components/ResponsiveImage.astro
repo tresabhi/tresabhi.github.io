@@ -17,22 +17,12 @@ const name = await hashContent(buffer);
 const { src, srcset, metadata } = await sourceSet(image, name);
 ---
 
-<style
-  define:vars={{
-    "aspect-ratio": `${metadata.width} / ${metadata.height}`,
-    "max-width": `${metadata.width}px`,
-  }}
->
-  .responsive-image {
-    aspect-ratio: var(--aspect-ratio);
-    width: min(100%, var(--max-width));
-  }
-</style>
-
 <img
   {src}
   {srcset}
   {alt}
+  width={metadata.width}
+  height={metadata.height}
   class="responsive-image"
   loading="lazy"
   decoding="async"
