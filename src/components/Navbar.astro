@@ -18,6 +18,13 @@ export const APPROXIMATE_navbarHeight = 54;
 ---
 
 <style>
+  @media print {
+    #navbar,
+    #navbar-spacer {
+      display: none;
+    }
+  }
+
   #navbar {
     --transition-duration: 200ms;
 
@@ -100,7 +107,7 @@ export const APPROXIMATE_navbarHeight = 54;
   document.addEventListener("scroll", handleScroll);
 </script>
 
-<Box height={`${APPROXIMATE_navbarHeight}px`} />
+<Box id="navbar-spacer" height={`${APPROXIMATE_navbarHeight}px`} />
 
 <Flex id="navbar" align="center" justify="center" overflow="hidden">
   <Flex

@@ -35,6 +35,12 @@ const href = `#${id}`;
     letter-spacing: var(--letter-spacing-9);
   }
 
+  @media print {
+    .anchor {
+      display: none;
+    }
+  }
+
   .anchor {
     position: absolute;
     left: 0;

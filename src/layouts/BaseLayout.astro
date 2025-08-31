@@ -47,11 +47,27 @@ const { maxWidth = pageMaxWidth } = Astro.props;
       }
     </style>
 
+    <script is:inline>
+      const query = window.matchMedia("(prefers-color-scheme: dark)");
+
+      function applyTheme() {
+        document.documentElement.className = query.matches ? "dark" : "light";
+      }
+
+      applyTheme();
+      query.addEventListener("change", applyTheme);
+
+      window.addEventListener("beforeprint", () => {
+        document.documentElement.className = "light";
+      });
+      window.addEventListener("afterprint", applyTheme);
+    </script>
+
     <slot name="head" />
   </head>
 
   <body>
-    <BaseTheme>
+    <BaseTheme id="container">
       <Flex direction="column" overflow="hidden" maxWidth="100vw">
         <Navbar />
 

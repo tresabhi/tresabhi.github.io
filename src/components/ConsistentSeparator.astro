@@ -1,15 +1,13 @@
 ---
-import { Box, Flex } from "@radix-ui/themes";
+
 ---
 
 <style is:global>
   .consistent-separator {
-    height: 1pt;
-    background: linear-gradient(90deg, var(--gray-4), var(--gray-2));
-    flex: 1;
+    border: calc(1px / 1000) solid var(--gray-5);
+    margin: 0;
+    width: 100%;
   }
 </style>
 
-<Flex gap="2">
-  <Box className="consistent-separator" />
-</Flex>
+<hr class="consistent-separator" />
