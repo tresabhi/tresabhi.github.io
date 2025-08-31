@@ -1,10 +1,10 @@
 import { getCollection, type InferEntrySchema } from "astro:content";
 import { lexer, type Context } from "./lexer";
 
-const collection = await getCollection("posts");
+const collection = await getCollection("docs");
 export const content: Context[] = [];
 
-export type FrontMatter = InferEntrySchema<"posts">;
+export type FrontMatter = InferEntrySchema<"docs">;
 
 for (const item of collection) {
   if (!item.filePath) throw new Error("Missing file path");
