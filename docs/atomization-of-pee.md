@@ -2,7 +2,7 @@
 hero: https://i.imgur.com/V6GLp64.png
 ---
 
-# Atomization of Piss
+# Atomization of Pee
 
 Iowa State University features well-placed restrooms throughout the campus, sometimes even matching the caliber of the restrooms found at high-profile buildings/complexes like international airports and trade centers, as seen in Marston Hall and most of the library. However, the men’s restrooms often fall short due to a distinct lack of urinal partitions (or dividers)—the protruding surfaces that separate the urinals on either side and pad the end of arrays. The lack of this one-time investment causes several issues, including, but not limited to, reduced parallelism among multiple urinals, uneven wear on units (Smither, 2025), propagation of diseases leading to urine tract infections (_How Much Space Should Be Between Urinals?_, n.d.), reduced privacy leading to disjunction from ADA compliance (Visser, 2025), etc.
 

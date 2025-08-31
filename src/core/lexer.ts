@@ -5,13 +5,12 @@ import { fail } from "./fail";
 import { git } from "./git";
 import { latexBlockExtension, latexInlineExtension } from "./latexExtensions";
 import { makeDate } from "./makeDate";
-import { sluggify } from "./sluggify";
 
 export interface Context {
   frontMatter: FrontMatter;
   tokens: TokensList;
 
-  slug: string;
+  path: string;
   title: string;
   description: string;
 
@@ -21,7 +20,7 @@ export interface Context {
 
 use({ extensions: [latexBlockExtension, latexInlineExtension] });
 
-export async function lexer(file: string, content: string) {
+export async function lexer(file: string, path: string, content: string) {
   const tokens = _lexer(content);
 
   const h0 =
@@ -36,7 +35,6 @@ export async function lexer(file: string, content: string) {
 
   const title = h0.text;
   const description = p0.text;
-  const slug = sluggify(title);
 
   const created = await git
     .log({ file, n: 1, "--diff-filter": "A" })
@@ -46,7 +44,7 @@ export async function lexer(file: string, content: string) {
 
   return {
     tokens,
-    slug,
+    path,
     title,
     description,
     created,

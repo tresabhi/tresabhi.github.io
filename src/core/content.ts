@@ -11,7 +11,7 @@ for (const item of collection) {
   if (!item.body) throw new Error("Missing body");
 
   const frontMatter = item.data;
-  const context = await lexer(item.filePath, item.body);
+  const context = await lexer(item.filePath, item.id, item.body);
 
   if (frontMatter.hero) context.images.add(frontMatter.hero);
 
