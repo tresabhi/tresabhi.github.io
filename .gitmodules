@@ -1,0 +1,3 @@
+[submodule "docs/isu"]
+	path = docs/isu
+	url = https://github.com/tresabhi/isu
