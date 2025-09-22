@@ -11,6 +11,7 @@ interface Props {
 const LANGUAGES = new Map([
   [["ts", "tsx"], "TypeScript"],
   [["js", "jsx"], "JavaScript"],
+  [["python", "py"], "Python"],
 ]);
 
 export function HighlightedCodeWrapper({ lang, content, children }: Props) {
