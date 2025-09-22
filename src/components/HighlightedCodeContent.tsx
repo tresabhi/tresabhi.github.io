@@ -4,11 +4,14 @@ import { toJsxRuntime } from "hast-util-to-jsx-runtime";
 import { Fragment, jsx, jsxs } from "react/jsx-runtime";
 
 interface Props {
-  tree: Root;
+  tree: Root | string;
 }
 
 export function HighlightedCodeContent({ tree }: Props) {
-  const node = toJsxRuntime(tree, { Fragment, jsx, jsxs });
+  const node =
+    typeof tree === "string"
+      ? tree
+      : toJsxRuntime(tree, { Fragment, jsx, jsxs });
 
   return (
     <Code

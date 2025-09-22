@@ -26,7 +26,7 @@ export function HighlightedCodeWrapper({ lang, content, children }: Props) {
     }
   }
 
-  if (language === undefined) {
+  if (lang.length > 0 && language === undefined) {
     throw new Error(`Unsupported language: ${lang}`);
   }
 
