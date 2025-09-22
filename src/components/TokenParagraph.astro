@@ -9,6 +9,12 @@ type Props = TokenRendererProps<Tokens.Paragraph>;
 const { token, context } = Astro.props;
 ---
 
-<Text wrap="pretty" mb="4">
+<style>
+  .rt-Text ~ .rt-Text {
+    margin-top: var(--space-4);
+  }
+</style>
+
+<Text wrap="pretty">
   <TokensRenderer {context} tokens={token.tokens} />
 </Text>

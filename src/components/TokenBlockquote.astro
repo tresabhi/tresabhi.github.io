@@ -9,19 +9,18 @@ import {
   Box,
   Code,
   Flex,
-  Text,
   type BlockquoteProps,
   type IconProps,
 } from "@radix-ui/themes";
 import { times } from "lodash-es";
-import { lexer, type Tokens } from "marked";
+import { type Tokens } from "marked";
 import type { FunctionComponent } from "react";
 import type { TokenRendererProps } from "./TokenRenderer.astro";
 import TokensRenderer from "./TokensRenderer.astro";
 
 type Props = TokenRendererProps<Tokens.Blockquote>;
 
-const variantPattern = /> \[!([A-Z]+)]\n>/;
+const variantPattern = /\[!(\w+)]/;
 const variantColors: Record<string, BlockquoteProps["color"]> = {
   CAUTION: "tomato",
   TIP: "blue",
@@ -42,24 +41,24 @@ const variantIcons: Record<string, FunctionComponent<IconProps>> = {
 };
 
 let { token, context } = Astro.props;
-const variantMatch = token.raw.match(variantPattern);
-let color: BlockquoteProps["color"];
-let name: string;
-let Icon: FunctionComponent<IconProps>;
 
-if (variantMatch) {
-  const type = variantMatch[1];
+const variant =
+  token.tokens?.[0] &&
+  token.tokens[0].type === "paragraph" &&
+  token.tokens[0].text.match(variantPattern)?.[1];
 
-  if (type in variantColors) {
-    color = variantColors[type as keyof typeof variantColors];
-    name = variantNames[type as keyof typeof variantNames];
-    Icon = variantIcons[type as keyof typeof variantIcons];
-    [token] = lexer(token.raw.slice(variantMatch[0].length));
+let color: BlockquoteProps["color"] = "gray";
+let name: string | undefined;
+let Icon: FunctionComponent<IconProps> | undefined;
+
+if (variant) {
+  if (variant in variantColors) {
+    color = variantColors[variant as keyof typeof variantColors];
+    name = variantNames[variant as keyof typeof variantNames];
+    Icon = variantIcons[variant as keyof typeof variantIcons];
   } else {
-    throw new Error(`Unknown blockquote variant: ${type}`);
+    throw new Error(`Unknown blockquote variant: ${variant}`);
   }
-} else {
-  throw new Error(`Missing blockquote variant in ${context.path}`);
 }
 
 const fill = `var(--${color}-9)`;
@@ -71,53 +70,58 @@ const tildaCount = 3;
 ---
 
 <Flex direction="column" align="start" mb="4">
-  <Flex>
-    <svg height="1.75rem" viewBox={`0 0 ${tildaWidth} ${tildaHeight}`}>
-      <polygon
-        {fill}
-        points={`${tildaWidth} 0,` +
-          `${2 * tildaWidth} 0,` +
-          `${tildaWidth} ${tildaHeight},` +
-          `${0} ${tildaHeight}`}></polygon>
-    </svg>
+  {
+    variant && Icon && (
+      <Flex>
+        <svg height="1.75rem" viewBox={`0 0 ${tildaWidth} ${tildaHeight}`}>
+          <polygon
+            {fill}
+            points={
+              `${tildaWidth} 0,` +
+              `${2 * tildaWidth} 0,` +
+              `${tildaWidth} ${tildaHeight},` +
+              `${0} ${tildaHeight}`
+            }
+          />
+        </svg>
 
-    <Flex align="center" style={{ backgroundColor: fill }} px="1">
-      <Code
-        {color}
-        variant="solid"
-        style={{
-          background: "none",
-          display: "flex",
-          alignItems: "center",
-          gap: "var(--space-1)",
-        }}
-      >
-        <Icon width="1em" height="1em" />
-        {name}
-      </Code>
-    </Flex>
+        <Flex align="center" style={{ backgroundColor: fill }} px="1">
+          <Code
+            {color}
+            variant="solid"
+            style={{
+              background: "none",
+              display: "flex",
+              alignItems: "center",
+              gap: "var(--space-1)",
+            }}
+          >
+            <Icon width="1em" height="1em" />
+            {name}
+          </Code>
+        </Flex>
 
-    <svg
-      height="1.75rem"
-      viewBox={`0 0 ${tildaCount * (tildaWidth + tildaSpace) - tildaSpace} ${tildaHeight}`}
-    >
-      {
-        times(tildaCount, (i) => {
-          return (
-            <polygon
-              points={
-                `${i * (tildaWidth + tildaSpace)} 0,` +
-                `${i * (tildaWidth + tildaSpace) + tildaWidth} 0,` +
-                `${i * (tildaWidth + tildaSpace)} ${tildaHeight},` +
-                `${i * (tildaWidth + tildaSpace) - tildaWidth} ${tildaHeight}`
-              }
-              {fill}
-            />
-          );
-        })
-      }
-    </svg>
-  </Flex>
+        <svg
+          height="1.75rem"
+          viewBox={`0 0 ${tildaCount * (tildaWidth + tildaSpace) - tildaSpace} ${tildaHeight}`}
+        >
+          {times(tildaCount, (i) => {
+            return (
+              <polygon
+                points={
+                  `${i * (tildaWidth + tildaSpace)} 0,` +
+                  `${i * (tildaWidth + tildaSpace) + tildaWidth} 0,` +
+                  `${i * (tildaWidth + tildaSpace)} ${tildaHeight},` +
+                  `${i * (tildaWidth + tildaSpace) - tildaWidth} ${tildaHeight}`
+                }
+                {fill}
+              />
+            );
+          })}
+        </svg>
+      </Flex>
+    )
+  }
 
   <Box
     p="2"
@@ -125,8 +129,11 @@ const tildaCount = 3;
       background: `linear-gradient(90deg, var(--${color}-a3), transparent)`,
     }}
   >
-    <Text>
-      <TokensRenderer {context} tokens={token.tokens} />
-    </Text>
+    <Flex direction="column">
+      <TokensRenderer
+        {context}
+        tokens={variant ? token.tokens?.slice(1) : token.tokens}
+      />
+    </Flex>
   </Box>
 </Flex>
