@@ -59,7 +59,7 @@ if (variantMatch) {
     throw new Error(`Unknown blockquote variant: ${type}`);
   }
 } else {
-  throw new Error("Missing blockquote variant");
+  throw new Error(`Missing blockquote variant in ${context.path}`);
 }
 
 const fill = `var(--${color}-9)`;
