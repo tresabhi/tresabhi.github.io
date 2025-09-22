@@ -3,6 +3,7 @@ import {
   ChatBubbleIcon,
   ExclamationTriangleIcon,
   InfoCircledIcon,
+  RocketIcon,
 } from "@radix-ui/react-icons";
 import {
   Box,
@@ -25,16 +26,19 @@ const variantColors: Record<string, BlockquoteProps["color"]> = {
   CAUTION: "tomato",
   TIP: "blue",
   NOTE: "jade",
+  IMPORTANT: "orange",
 };
 const variantNames: Record<string, string> = {
   CAUTION: "CAUTION",
   TIP: "TIP",
   NOTE: "NOTE",
+  IMPORTANT: "IMPORTANT",
 };
 const variantIcons: Record<string, FunctionComponent<IconProps>> = {
   CAUTION: ExclamationTriangleIcon,
   TIP: InfoCircledIcon,
   NOTE: ChatBubbleIcon,
+  IMPORTANT: RocketIcon,
 };
 
 let { token, context } = Astro.props;
