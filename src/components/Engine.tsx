@@ -76,7 +76,7 @@ const outlineMaterial = new LineBasicMaterial({
 });
 
 const fillMaterial = new MeshBasicMaterial({
-  color: mauveDark.mauve1,
+  color: mauveDark.mauve7,
   depthWrite: true,
   transparent: true,
   opacity: 2 ** -2,
