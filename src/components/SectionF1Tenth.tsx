@@ -7,6 +7,7 @@ export function SectionF1Tenth() {
     <Project
       title="F1TENTH Digital Twin AI"
       image="/images/f1tenth-512w.png"
+      skills={["Python", "Lidar", "AI"]}
       imageWidth="20rem"
       reverse
       shadowIntensity={5}
