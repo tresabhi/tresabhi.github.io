@@ -21,7 +21,7 @@ export function SectionJET() {
       shadowIntensity={4}
       sticky
       imageWidth="8rem"
-      time="Aug 2024 - Present"
+      time="Aug 2024 - May 2025"
       reverse
     >
       <Text>

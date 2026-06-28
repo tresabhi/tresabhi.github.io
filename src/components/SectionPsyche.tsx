@@ -8,7 +8,7 @@ export function SectionPsyche() {
       image="/images/psyche-640w.png"
       imageWidth="20rem"
       reverse
-      time="Sep 2025 - Present"
+      time="Sep 2025 - Apr 2026"
     >
       <Text wrap="pretty">
         I use my general technical skills and creative talents to share,
