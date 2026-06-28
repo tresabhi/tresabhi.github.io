@@ -8,6 +8,7 @@ export function BaseTheme({
   return (
     <Theme
       accentColor="red"
+      grayColor="mauve"
       radius="full"
       style={{ display: "contents" }}
       appearance={appearance}

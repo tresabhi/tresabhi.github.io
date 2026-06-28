@@ -41,7 +41,7 @@ export function Engine() {
             position: new Vector3(x, y, z).multiplyScalar(0.7),
           }}
           scene={{
-            fog: new Fog(mauveDark.mauve1, near0, far0),
+            fog: new Fog(mauveDark.mauve3, near0, far0),
           }}
         >
           <Suspense fallback={null}>
@@ -71,8 +71,15 @@ function FogManager() {
 }
 
 const outlineMaterial = new LineBasicMaterial({
-  color: 0x424242,
+  color: mauveDark.mauve7,
   linewidth: 1,
+});
+
+const fillMaterial = new MeshBasicMaterial({
+  color: mauveDark.mauve1,
+  depthWrite: true,
+  transparent: true,
+  opacity: 2 ** -2,
 });
 
 function Model() {
@@ -83,12 +90,7 @@ function Model() {
     scene.children.forEach((child) => {
       if (child instanceof Mesh) {
         child.renderOrder = -1;
-        child.material = new MeshBasicMaterial({
-          color: 0x757575,
-          depthWrite: true,
-          transparent: true,
-          opacity: 2 ** -3,
-        });
+        child.material = fillMaterial;
 
         return;
       }

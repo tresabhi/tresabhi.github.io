@@ -18,7 +18,7 @@ export function SectionIntro({ skeleton }: MaybeSkeletonProps) {
       style={{
         position: "relative",
         overflow: "clip",
-        background: "var(--gray-1)",
+        background: "var(--gray-3)",
       }}
     >
       {!skeleton && <Engine />}
