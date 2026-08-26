@@ -22,7 +22,6 @@ export function SectionJET() {
       sticky
       imageWidth="8rem"
       time="Aug 2024 - May 2025"
-      reverse
     >
       <Text>
         I <BM>designed</BM> and <BM>manufactured</BM> the heart of our jet

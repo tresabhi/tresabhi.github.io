@@ -10,6 +10,7 @@ export function SectionBlitzKit() {
       image="/images/blitzkit-tank-640w.png"
       imageWidth="20rem"
       time="Apr 2022 - Present"
+      reverse
     >
       <Text>
         BlitzKit is a passion project of mine that documents the armor profiles,
