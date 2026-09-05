@@ -53,7 +53,7 @@ export function SectionIntro({ skeleton }: MaybeSkeletonProps) {
                   color="red"
                   style={{ color: "var(--accent-10)" }}
                 >
-                  Aerospace Engineer
+                  Engineer
                 </Text>{" "}
                 driven by an insatiable curiosity and a passion for turning
                 ambitious ideas into reality. From designing and manufacturing
@@ -77,7 +77,7 @@ export function SectionIntro({ skeleton }: MaybeSkeletonProps) {
                   color="red"
                   style={{ color: "var(--accent-10)" }}
                 >
-                  Aerospace Engineer
+                  Engineer
                 </Text>{" "}
                 driven by an insatiable curiosity and a passion for turning
                 ambitious ideas into reality. From designing and manufacturing

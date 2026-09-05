@@ -10,6 +10,19 @@ export function SectionPaintings() {
         <Em>And I dabble with a bit of painting...</Em>
       </Text>
 
+      <Flex direction="column" gap="6" align="center">
+        <Painting
+          width="15rem"
+          src="/paintings/earth-460w.png"
+          style={{ aspectRatio: "1 / 1" }}
+        />
+        <PaintingLabel
+          name="Earth"
+          year={2025}
+          description='A painting of the Earth on a tiny 1" canvas'
+        />
+      </Flex>
+
       <Flex direction="column" gap="6">
         <Box position="relative" height="min(calc(100vw * 5 / 4 / 2), 32rem)">
           <Painting
