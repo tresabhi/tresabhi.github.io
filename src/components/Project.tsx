@@ -70,6 +70,7 @@ export function Project({
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
                 filter: `drop-shadow(${shadowX} ${shadowY} 0.25rem var(--black-a${shadowIntensity}))`,
+                borderRadius: "var(--space-3)",
               }}
             />
           </Flex>
@@ -91,6 +92,7 @@ export function Project({
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
               filter: `drop-shadow(${shadowX} ${shadowY} 0.25rem var(--black-a${shadowIntensity}))`,
+              borderRadius: "var(--space-3)",
             }}
           />
         </Box>

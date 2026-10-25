@@ -5,7 +5,7 @@ export function SectionPsyche() {
   return (
     <Project
       title="NASA Psyche Intern"
-      image="/images/psyche-640w.png"
+      image="/images/psyche.gif"
       imageWidth="20rem"
       reverse
       time="Sep 2025 - Apr 2026"
